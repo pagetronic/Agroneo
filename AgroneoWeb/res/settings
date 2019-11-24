@@ -9,7 +9,7 @@ UI_LOGO=/ui/logo
 
 TROPICOS_API_KEY=
 
-REPO=/data/repo/Agroneo
+REPO=/data/repo/Agroneo/AgroneoWeb
 
 STANDARD_HOST=agroneo.com
 HOST_API=api.agroneo.com
