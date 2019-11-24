@@ -16,7 +16,7 @@ HOST_API=api.agroneo.com
 HOST_CDN=agroneo.net
 HTTP_PROTO=https://
 
-COOKIE_NAME=grow
+COOKIE_NAME=growSid
 
 PUBS=false
 
