@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>agroneo-croner</artifactId>
-    <name>Agroneo Croner</name>
+    <artifactId>growcroner</artifactId>
+    <name>GrowCroner</name>
     <version>2.1</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>live.page</groupId>
         <artifactId>Agroneo</artifactId>
-        <version>[2.0.0,2.9.9)</version>
+        <version>[1.0.0,1.9.9)</version>
         <relativePath>../../Agroneo</relativePath>
     </parent>
     <build>
