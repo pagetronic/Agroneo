@@ -1,2 +1,3 @@
 # Agroneo
-Growing application for plants
+
+Growing application for plants, [Agroneo](https://agroneo.com). 
