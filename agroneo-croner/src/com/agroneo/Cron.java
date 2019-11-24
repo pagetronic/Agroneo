@@ -3,7 +3,7 @@
  */
 package com.agroneo;
 
-import com.agroneo.tropicos.ia.IATropicos;
+import com.agroneo.tropicos.ia.TropicosIA;
 import com.agroneo.tropicos.api.TropicosApi;
 import live.page.notice.Notices;
 import live.page.web.utils.Fx;
@@ -12,7 +12,7 @@ public class Cron {
 
 	public static void main(String[] args) {
 		if (Fx.IS_DEBUG || (args.length > 0 && args[0].equals("update"))) {
-			IATropicos.update();
+			TropicosIA.update();
 		} else {
 			TropicosApi.run();
 			Notices.cron();

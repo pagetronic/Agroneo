@@ -16,7 +16,7 @@ import live.page.web.utils.json.Json;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IATropicos {
+public class TropicosIA {
 	public static void update() {
 
 		try {
