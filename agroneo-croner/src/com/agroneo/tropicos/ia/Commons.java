@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class IACommons {
+public class Commons {
 	public static List<String> commonsName(String description) {
 		description = description.replaceAll("[ ]?+\\([ ]?+([^)]+)[ ]?+\\)[ ]?+", "");
 		description = description.replaceAll("\n", ".");

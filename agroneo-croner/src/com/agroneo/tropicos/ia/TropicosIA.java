@@ -46,11 +46,11 @@ public class TropicosIA {
 	}
 
 	public static void updateSpecimen(Json specimen) {
-		String type = IAClassification.findType(specimen);
+		String type = Classification.findType(specimen);
 		String description = specimen.getText("text", "");
 		List<String> commons = new ArrayList<>();
 
-		for (String common : IACommons.commonsName(description)) {
+		for (String common : Commons.commonsName(description)) {
 			String url = Fx.cleanURL(common).toLowerCase();
 			Json cmm = Db.findOneAndUpdate("Commons", Filters.eq("_id", url),
 					new Json()
@@ -60,8 +60,8 @@ public class TropicosIA {
 			commons.add(cmm.getId());
 		}
 
-		List<Double> tall = IASizing.findTall(description);
-		List<Double> large = IASizing.findLarge(description);
+		List<Double> tall = Sizing.findTall(description);
+		List<Double> large = Sizing.findLarge(description);
 
 		Json update = new Json();
 		Json size = new Json();

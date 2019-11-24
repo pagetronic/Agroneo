@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class IASizing {
+public class Sizing {
 	public static List<Double> findTall(String description) {
 
 		String tor = "[ ]?+([0-9.]+)[ ]?+(à|to|\\-|\\+/\\-)?[ ]?+([0-9]+)?[ ]?+";

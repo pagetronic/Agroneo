@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class IAClassification {
+public class Classification {
 
 	public static String findType(Json specimen) {
 
