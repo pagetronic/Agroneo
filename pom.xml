@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>agroneo</artifactId>
-    <version>3.1</version>
+    <version>3.8</version>
     <packaging>war</packaging>
     <name>Agroneo</name>
     <description>Agroneo Web Interface</description>

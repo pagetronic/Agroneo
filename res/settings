@@ -7,6 +7,7 @@ SITE_TITLE=Agroneo
 LOGO_TITLE=AGRO<g>NEO</g>
 UI_LOGO=/ui/logo
 
+TROPICOS_API_KEY=
 
 REPO=/data/repo/Agroneo
 
