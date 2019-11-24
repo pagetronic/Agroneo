@@ -1,0 +1,94 @@
+<div class="bubble" itemid="$specimen.id" itemscope="" itemtype="https://schema.org/Place">
+    <meta itemprop="hasMap" content="$http_site/gaia#$specimen.location.coordinates[1];$specimen.location.coordinates[0];16;$specimen.id;;"/>
+    <div class="gaia_flex">
+        #if($specimen.images.size()>0)
+        <div class="gaia_photos">
+            #foreach($image in $specimen.images)
+            #if($velocityCount==0)
+                #set($modulo=0)
+                <div class="first">#set($open=true)
+            #else
+                #set($modulo=$velocityCount %2)
+                #if($modulo == 1)
+                    <div class="coll">#set($open=true)
+                #end
+            #end
+            <div class="image" itemprop="photo" itemscope="" itemtype="https://schema.org/ImageObject">
+                <a href="$image.url" itemprop="image" class="popimage">
+                    #if($velocityCount==0)
+                        #if($velocityLast)
+                            <img itemprop="thumbnail" src="$image.url@462x200.jpg" width="462" height="200"/>
+                        #else
+                            <img itemprop="thumbnail" src="$image.url@280x200.jpg" width="280" height="200"/>
+                        #end
+                    #else
+                        #if($velocityLast && $modulo == 1)
+                            <img itemprop="thumbnail" src="$image.url@180x200.jpg" width="180" height="200"/>
+                        #else
+                           <img itemprop="thumbnail" src="$image.url@180x99.jpg" width="180" height="99"/>
+                        #end
+                    #end
+                <meta itemprop="dateCreated" content="$Fx.isoDate($specimen.date)"/>
+                #if($specimen.update)<meta itemprop="dateUpdated" content="$Fx.isoDate($specimen.update)"/>#end
+                #if($image.text)<span itemprop="caption">$image.text.replace('©','<br/>©')</span>#end
+                </a>
+            </div>
+                #if($open && $modulo == 0)#set($open=false)
+                    </div>
+                #end
+            #end
+            #if($open)#set($open=false)
+                </div>
+            #end
+        </div>
+        #end
+        <div class="gaia_data">
+            <h3 itemprop="name">#gaiatitle($specimen.title)</h3>
+            #parse('/gaia/infos.html')
+            <p>
+                $svg.fa_icon_calendar <small>#date($specimen.date) (#since($specimen.date,2)#if($specimen.update), #lang('UPDATED', "#since($specimen.update, 2 )")#end)
+                <span class="rating" rating="Specimens($specimen.id)"#if($specimen.review && $specimen.review.count>0) itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"#end>
+                    #if($specimen.review && $specimen.review.count>0)
+                    <span itemprop="ratingValue" class="value">$specimen.review.value</span>
+                    <span itemprop="ratingCount" class="count">$specimen.review.count</span>
+                    <span itemprop="bestRating">5</span>
+                    <span itemprop="worstRating">1</span>
+                    #end
+                </span>
+                #if($specimen.replies>0) &#8211; $specimen.replies #if($specimen.replies==1)#lang('COMMENT')#else#lang('COMMENTS')#end#end</small>
+            </p>
+            #if($specimen.text)
+            <p itemprop="description">
+               $Fx.truncate($specimen.text,500)
+            </p>
+            #if($debug)
+                #foreach($lang in $langs_domains)
+                <p itemprop="description"><strong>#lang("COUNTRY",$lang.key):</strong>
+                    $Fxm.translate($specimen.text,$lang.key)
+                </p>
+                #end
+            #end
+            #end
+        #if($specimen.location)
+            <p>$svg.mi_location_on<small>$Fxm.convertDMS($specimen.location)</small></p>
+        #end
+        #if($specimen.users)
+        <p><small>#foreach($user in $specimen.users)#modulo("$svg.mi_nature_people ","  &#8211;  $svg.mi_nature_people ","  &#8211;  $svg.mi_nature_people ")$user.name#end</small></p>
+        #end
+        #if($specimen.tropicos)
+            <p class="src">
+                <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="$http_cdn/ui/cc-by-sa@45x15" width="45" height="15" alt="Creative Commons BY-SA"/></a>
+                <a href="$specimen.tropicos"><img src="$http_cdn/ui/tropicos@75x15" width="75" height="15" alt="Tropicos"/></a>
+            </p>
+         #end
+        </div>
+    </div>
+    <div class="both"></div>
+    <p class="infos">
+        <a href="$specimen.family.url">$specimen.family.name</a> ›
+        <a href="$specimen.genus.url">$specimen.genus.name</a> ›
+        <a href="$specimen.species.url">$specimen.species.name</a> ›
+        <a href="$specimen.url">#lang('SPECIMEN','ucfirst') #gaiatitle($specimen.title)</a>
+    </p>
+    <div class="both"></div>
+</div>

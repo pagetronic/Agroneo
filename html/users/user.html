@@ -1,0 +1,85 @@
+#parse("/inc/top.html")
+<div id="middle" class="user">
+
+    #parse("/inc/breadcrumb.html")
+
+
+    <div class="profile">
+        <div class="flexible">
+            <div class="avatar" id="avatar">
+                <picture>
+                    <img src="$userdata.avatar@100x100" alt="avatar" width="100" height="100"/>
+                </picture>
+            </div>
+            #if($user.id==$userdata.id || $user.editor)
+            <script type="text/javascript">
+                sys.push(function () {
+                    sys.profile.avatar($('#avatar'));
+                });
+            </script>
+            #end
+            <div class="flexable">
+                <h1>$userdata.name</h1>#if($userdata.join)
+                <p>#lang('USER_JOIN', "#since($userdata.join)"), #lang('USER_LAST_ACTIVITY',
+                    "#since($userdata.last)")</p>#end
+            </div>
+        </div>
+    </div>
+
+    #if ($posts.result.size()>0)
+    <div class="posts">
+        <h2>#lang('POSTS')</h2>
+        #foreach( $post in $posts.result )
+            #parse('/threads/post_item.html')
+        #end
+        <div class="pagination">
+            #pagination($posts.paging)
+        </div>
+    </div>
+    #end
+
+    <div class="cooltxt gaia">
+
+        #if($specimens.result)
+        #set($mediator="<button onclick='gaia.init()' class='gaiabtn'><txt>#lang('GAIA_VIEW_MAP')</txt></button>")
+        <div class="pagination">#pagination($specimens.paging)</div>
+        #set($mediator="")
+        #foreach($specimen in $specimens.result)
+            #parse("/gaia/specimen_item.html")
+        #end
+        <div class="pagination">#pagination($specimens.paging)</div>
+        #set($mediator="")
+    </div>
+    #if ($posts.result.size()>0)
+    <h2>#lang('POSTS')</h2>
+    <div class="pagination">#pagination($specimens.paging)</div>
+    #foreach( $post in $posts.result )
+    #set($thread=$post.question)
+    <div class="posts">
+        <div class="thread">
+            #if($thread.url)
+            <strong><a href="$thread.url" #if($thread.replies<=0) rel="nofollow"#end>$thread.title</a></strong>
+            <div class="data">
+                #lang('THREAD_POSTED_SINCE',"#since($thread.date,2)")<br/>
+                #if($thread.replies>0)$thread.replies #if($thread.replies > 1
+                )#lang('REPLIES')#else#lang('REPLY')#end#else#lang('NO_REPLY')#end
+            </div>
+            #else
+            <strong>#lang('REMOVED')</strong>
+            #end
+        </div>
+        #parse("/forums/post_item.html")
+        #if($thread.url)
+        <div class="link">
+            #foreach( $bread in $thread.breadcrumb )<a href="$bread.url">$bread.title</a> › #end
+            <a href="$thread.url" #if($thread.replies<=0) rel="nofollow"#end>$thread.title</a>
+        </div>
+        #end
+    </div>
+    #end
+    <div class="pagination">#pagination($posts.paging)</div>
+</div>
+#end
+#end
+</div>
+#parse("/inc/bottom.html")

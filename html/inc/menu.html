@@ -1,0 +1,41 @@
+<div id="menu">
+	<ul id="cmd">
+		<li class="home"><a href="/">$site_title</a></li>
+		<li><a class="pio#if($active=='gaia') active#end" href="/gaia">#lang('GAIA_MENU')</a>
+			<ul>
+				<li><a href="/gaia/specimens">#lang('GAIA_LAST_SPECIMENS')</a></li>
+				<li><a href="/gaia/commons">#lang('COMMONS_NAMES')</a></li>
+				<li><a href="/gaia/rubiaceae">Rubiaceae</a></li>
+				<li><a href="/gaia/orchidaceae">Orchidaceae</a></li>
+				<li><a href="/gaia/fabaceae">Fabaceae</a></li>
+				<li><a href="/gaia/euphorbiaceae">Euphorbiaceae</a></li>
+				<li><a href="/gaia/asteraceae">Asteraceae</a></li>
+				<li><a href="/gaia/apocynaceae">Apocynaceae</a></li>
+				<li><a href="/gaia/melastomataceae">Melastomataceae</a></li>
+				<li><a href="/gaia/malvaceae">Malvaceae</a></li>
+			</ul>
+		</li>
+		#if($lng=='fr')
+		#parse('/langs/menu_fr.html')
+		#else
+		<li><a href="https://fr.agroneo.com/">Agroneo France</a></li>
+		#parse('/langs/menu.html')
+		#end
+		<!--<li><a class="users#if($active=='users') active#end" href="/users">#lang('USERS')</a></li>-->
+		<li><a class="money#if($active=='copyright') active#end" href="/copyright">#lang('COPYRIGHT')</a></li>
+		#if( $user.editor )
+		<li><a href="/reports" class="car#if($active=='reports') active#end" rel="nofollow">#lang('REPORTS')
+			#if($reports_count && $reports_count>0)($reports_count)#end</a></li>
+		#end
+		#if( $user.admin )
+		<li><a href="/admin" class="car#if($active=='admin') active#end" rel="nofollow">Admin</a></li>
+		#end
+		<li><a class="profile#if($profile_active=='profile') active#end" rel="nofollow" href="/profile">#if( $user
+			)${user.name}#else#lang('PROFILE')#end</a></li>
+	</ul>
+	<script type="text/javascript">
+		sys.push(function () {
+			sys.menu.init();
+		});
+	</script>
+</div>

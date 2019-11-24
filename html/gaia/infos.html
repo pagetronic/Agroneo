@@ -1,0 +1,7 @@
+#if($debug)
+#if($specimen.type)<p>Type: $specimen.type</p>#end
+#if($specimen.size.tall)<p>Tall: #if($specimen.size.tall.max)#lang('FROMTO', "#size($specimen.size.tall.min)", "#size($specimen.size.tall.max)")#else#size($specimen.size.tall.min)#end</p>#end
+#if($specimen.size.large)<p>Large: #if($specimen.size.large.max)#lang('FROMTO', "#size($specimen.size.large.min)", "#size($specimen.size.large.max)")#else#size($specimen.size.large.min)#end</p>#end
+#end
+#if($specimen.commons)<p>#if($specimen.commons.size()>1)#lang("COMMONS_NAMES")#else#lang("COMMON_NAME")#end: #foreach($common in $specimen.commons)#modulo("" " | " " | ") <a href="$common.url">$common.name</a>#end</p>#end
+

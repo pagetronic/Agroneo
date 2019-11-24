@@ -1,0 +1,270 @@
+#comodo logo strong {
+    font-size: 29px;
+    letter-spacing: -2px;
+}
+
+#comodo logo a {
+    background: url(/ui/logo@30x30) 5px 2px no-repeat;
+}
+
+.avatar picture {
+    background: linear-gradient(to right, #31771D 0%, #31771D 50%, #a96923 50%, #a96923 100%);
+}
+
+:nth-child(odd) .avatar picture {
+    background: linear-gradient(to left, #a96923 0%, #a96923 50%, #31771D 50%, #31771D 100%);
+}
+
+#dynamit {
+    background: linear-gradient(to right, #a96923 0%, #31771D 100%);
+}
+
+h1, h2, h3, h4, h5, #comodo logo a, .brown {
+    color: #a96923;
+}
+
+ul.links li.hr, #breadcrumb a, #breadcrumb, #menu li:hover a, #menu a.active, #comodo logo a g, .cooltxt .infos, .cooltxt .infos a, .green, .links h2, .links h2 a {
+    color: #31771D;
+}
+
+.cooltxt .infos a {
+    border-color: #31771D;
+}
+
+.searcher li {
+    border-left: 5px solid #a96923;
+}
+
+.page_edit .item, .searcher li:nth-child(odd) {
+    border-left: 5px solid #31771D;
+}
+
+ul.links li:nth-child(odd) a:before, ul.links li:nth-child(odd) strong:before, .page_edit #pages_parents .parent:first-child, .arbo .duplicate svg, .arbo .add svg {
+    background: #31771D;
+}
+
+ul.links li a:before, ul.links li strong:before, nav.ancrage li a:hover {
+    background: #a96923;
+}
+
+ul.links li .add svg, .threads li .jump svg, .receivefile svg, #menu li:hover a, #menu a.active {
+    fill: #31771D;
+}
+
+.page_edit .item:nth-child(odd) {
+    border-left-color: #a96923;
+}
+
+.threads li .admin svg, .threads li .jump.brown svg, ul.links li .remove svg {
+    fill: #a96923;
+}
+
+@media (min-width: 701px) {
+    .post .avatar figcaption span {
+        border-left: 2px solid #a96923;
+        border-right: 2px solid #31771D;
+        border-top: 2px solid #a96923;
+        border-bottom: 2px solid #31771D;
+    }
+}
+
+@media all and (max-width: 900px) {
+    #menu ul a {
+        color: #31771D;
+    }
+
+}
+
+#menu a:before {
+    content: '';
+    float: left;
+    display: inline-block;
+    margin: 3px 4px 3px 5px;
+    background-image: url(/css/icons.png);
+    background-repeat: no-repeat;
+    height: 32px;
+    width: 32px;
+    background-position: -41px -68px;
+}
+
+#menu a.active:before, #menu a:active:before, #menu li:hover a:before {
+    background-position: -2px -68px;
+}
+
+#menu a.forum:before {
+    background-position: -40px -154px;
+}
+
+#menu li:hover a.forum:before, #menu a.active.forum:before {
+    background-position: -2px -154px;
+}
+
+#menu a.pio:before {
+    background-position: -40px -200px;
+}
+
+#menu li:hover a.pio:before, #menu a.active.pio:before {
+    background-position: -2px -200px;
+}
+
+#menu a.profile:before {
+    background-position: -40px -242px;
+}
+
+#menu li:hover a.profile:before, #menu a.active.profile:before {
+    background-position: -2px -242px;
+}
+
+#menu a.users:before {
+    background-position: -40px -287px;
+}
+
+#menu li:hover a.users:before, #menu a.active.users:before {
+    background-position: -2px -287px;
+}
+
+#menu a.ads:before {
+    background-position: -40px -324px;
+}
+
+#menu li:hover a.ads:before, #menu a.active.ads:before {
+    background-position: -2px -324px;
+}
+
+#menu a.plume:before {
+    background-position: -40px -366px;
+}
+
+#menu li:hover a.plume:before, #menu a.active.plume:before {
+    background-position: -2px -366px;
+}
+
+#menu a.share:before {
+    background-position: -40px -408px;
+}
+
+#menu li:hover a.share:before, #menu a.active.share:before {
+    background-position: -2px -408px;
+}
+
+#menu a.eggs:before {
+    background-position: -40px -452px;
+}
+
+#menu li:hover a.eggs:before, #menu a.active.eggs:before {
+    background-position: -2px -452px;
+}
+
+#menu a.trees:before {
+    background-position: -40px -494px;
+}
+
+#menu li:hover a.trees:before, #menu a.active.trees:before {
+    background-position: -2px -494px;
+}
+
+#menu a.plant:before {
+    background-position: -37px -537px;
+}
+
+#menu li:hover a.plant:before, #menu a.active.plant:before {
+    background-position: -1px -537px;
+}
+
+#menu a.car:before {
+    background-position: -40px -579px;
+}
+
+#menu li:hover a.car:before, #menu a.active.car:before {
+    background-position: -2px -579px;
+}
+
+#menu a.money:before {
+    background-position: -40px -619px;
+}
+
+#menu li:hover a.money:before, #menu a.active.money:before {
+    background-position: -2px -620px;
+}
+
+#menu a.onetree:before {
+    background-position: -40px -663px;
+}
+
+#menu li:hover a.onetree:before, #menu a.active.onetree:before {
+    background-position: -3px -663px;
+}
+
+#menu a.case:before {
+    background-position: -39px -324px;
+}
+
+#menu li:hover a.case:before, #menu a.active.onetree:before {
+    background-position: -1px -324px;
+}
+
+#menu a.google:before {
+    background-position: -24px -398px;
+}
+
+#menu li:hover a.google:before {
+    background-position: -3px -398px;
+}
+
+#menu ul a.facebook:before {
+    background-position: -24px -417px;
+}
+
+#menu li:hover a.facebook:before {
+    background-position: -3px -417px;
+}
+
+#menu li a.twitter:before {
+    background-position: -24px -475px;
+}
+
+#menu li:hover a.twitter:before {
+    background-position: -3px -475px;
+}
+
+#menu li a.live:before {
+    background-position: -24px -455px;
+}
+
+#menu li:hover a.live:before {
+    background-position: -3px -455px;
+}
+
+#menu ul a.disqus:before {
+    background-position: -24px -437px;
+}
+
+#menu li:hover a.disqus:before {
+    background-position: -3px -437px;
+}
+
+nav.ancrage li a {
+    border-radius: 20px;
+    border: 1px solid #a66a31;
+    box-shadow: 1px 1px 1px #d3d3d3;
+    color: #a66a31;
+}
+
+nav.ancrage li:hover a {
+    background: #a66a31;
+    color: #FFF;
+}
+
+nav.ancrage li a svg {
+    fill: #a66a31;
+}
+
+ul.links li.hr:before {
+    content: '';
+    float: left;
+    display: block;
+    background: url(/ui/icons@38) -1px -176px;
+    position: initial;
+    height: 16px;
+    width: 16px;
+}

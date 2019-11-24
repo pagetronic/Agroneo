@@ -1,0 +1,44 @@
+#parse("/inc/top.html")
+<div id="middle" class="gaia selectable scrollable">
+	#parse("/inc/breadcrumb.html")
+
+	<div class="cooltxt">
+		<h1>$title</h1>
+		#if($description)<p>$description</p>#end
+		#if($commons && $commons.size()>0)
+			<p>#if($commons.size()>1)#lang("COMMONS_NAMES")#else#lang("COMMON_NAME")#end: #foreach($common in $commons)#modulo<a href="$common.url">$common.name</a>#end.</p>
+		#end
+
+		#set($base=$base_canonical.split('\?').get(0))
+		#set($mediator="
+			#if($follow)
+				<button follow='$follow'>$svg.mi_notifications_none#lang('FOLLOW')</button>
+			#end
+		<a href='$base#if(!$req.sort)?sort=-update#end' class='button#if($req.sort) active#end'>$svg.mi_refresh#lang('UPDATE')</a>
+		<button onclick='gaia.init()' class='gaiabtn'><txt>#lang('GAIA_VIEW_MAP')</txt></button>
+		")
+		<div class="pagination"#if($subtitle) style="float:right"#end>#pagination($specimens.paging)</div>
+		#if($subtitle)<h2>$subtitle</h2>#end
+
+		#foreach($specimen in $specimens.result)
+		#parse("/gaia/specimen_item.html")
+		#end
+		<div class="pagination">#pagination($specimens.paging)</div>
+	</div>
+	#if($synonyms && $synonyms.size()>0)
+	<p>#foreach($synonym in $synonyms)#modulo("#lang('SYNONYMS','ucfirst'): ")$synonym#end.</p>
+	#end
+	<script type="text/javascript">
+		if (self !== top) {
+			sys.push(function () {
+				gaia.init();
+			});
+		}
+	</script>
+	<div class="publisher" itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+		#lang('PUBLICATION_DIRECTOR'):
+		<span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="https://laurent.page.live/logo.png" /></span>
+		<span itemprop="name">Laurent PAGE</span>, #lang('EMAIL'): <span itemprop="email">laurent@page.live</span>, #lang('PHONE'): <span itemprop="telephone">+262 262 92 66 38</span>, <span itemprop="url">https://page.live/</span>
+	</div>
+</div>
+#parse("/inc/bottom.html")

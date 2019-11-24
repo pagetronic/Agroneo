@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /oauth
+Disallow: /*?*tz=
+Disallow: /*noreply*
+Disallow: /noads
+Disallow: /profile
+Disallow: *%24*
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: ia_archiver
+Disallow: /

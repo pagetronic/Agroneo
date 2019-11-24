@@ -1,0 +1,59 @@
+#parse("/inc/top.html")
+<div id="middle" class="gaia selectable scrollable">
+    #parse("/inc/breadcrumb.html")
+    <div class="cooltxt">
+        <h1>$title</h1>
+        #if($description)<p>$description</p>#end
+        #set($mediator="
+        <button onclick='gaia.init()' class='gaiabtn'><txt>#lang('GAIA_VIEW_MAP')</txt></button>
+        #if($url_specimens)<a href='$url_specimens'>$svg.fa_icon_leaf<txt>&nbsp;#lang('GAIA_LAST_SPECIMENS','lowercase')#if($subtitle) ($subtitle)#end</txt></a>#end
+        ")
+        #if($items.result)
+        <div class="pagination">#pagination($items.paging)</div>
+        <nav class="ancrage">
+            <ol>
+                #foreach($item in $items.result)
+                <li>#if($item.commons && $item.commons.size()>0)
+                    <ul>#foreach($common in $item.commons)<li><a href="$common.url">$common.name</a></li>#end</ul>
+                    #end
+                    <a href="$item.url">
+                    $item.name.replace(' var. ', " #lang('GAIA_VARIETY') ").replace(' subsp. ', " #lang('GAIA_SUBSPECIES') ") <em>(
+                    #if($item.species)$item.species #if($item.species>1)#lang('SPECIESS')#else#lang('SPECIES')#end,#end
+                    $item.specimens #if($item.specimens>1)#lang('SPECIMENS')#else#lang('SPECIMEN')#end
+                    )</em></a>
+                </li>
+                #end
+            </ol>
+        </nav>
+        <div class="pagination">#set($mediator="")#pagination($items.paging)</div>
+        #end
+
+    </div>
+    <div class="publisher" itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+        #lang('PUBLICATION_DIRECTOR'):
+        <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="https://laurent.page.live/logo.png" /></span>
+        <span itemprop="name">Laurent PAGE</span>, #lang('EMAIL'): <span itemprop="email">laurent@page.live</span>, #lang('PHONE'): <span itemprop="telephone">+262 262 92 66 38</span>, <span itemprop="url">https://page.live/</span>
+    </div>
+</div>
+#if($specimens.result)
+<div id="lateral">
+    <ul class="links">
+        <li class="hr">#lang('GAIA_LAST_SPECIMENS')#if($subtitle) ($subtitle)#end</li>
+        #foreach($specimen in $specimens.result)
+        <li><a href="$specimen.url">#if($specimen.images.size()>0)<img src="$specimen.images[0].url@40x25.jpg" width="40" height="25" />#end
+            #gaiatitle($specimen.title) <em>#date($specimen.date)</em>
+            #if($specimen.text)<span>$Fx.truncate($specimen.text, 150)</span>#end
+        </a>
+        </li>
+        #end
+    </ul>
+    #if($url_specimens)<div class="pagination">
+        <a href="$url_specimens">$svg.fa_icon_leaf<txt>&nbsp;#lang('GAIA_LAST_SPECIMENS','lowercase')#if($subtitle) ($subtitle)#end</txt></a>
+        #if($specimens.paging.next)
+        <a href="$url_specimens?paging=$specimens.paging.next"><txt>#lang('NEXT')</txt>$svg.mi_navigate_next</a>
+            <a href="$url_specimens?paging=last">$svg.mi_fast_forward</a>
+        #end
+    </div>#end
+</div>
+#end
+#parse("/inc/bottom.html")

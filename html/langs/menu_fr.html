@@ -1,0 +1,113 @@
+<li><a class="forum#if($active=='threads') active#end" href="/questions">#lang('QUESTIONS')</a>
+    <ul>
+        <li><a href="/questions/plantes">Plantes</a></li>
+        <li><a href="/questions/agriculture">Agriculture</a></li>
+        <li><a href="/questions/techniques">Techniques</a></li>
+        <li><a href="/questions/semences">Semences</a></li>
+        <li><a href="/questions/phytosanitaire">Phytosanitaire</a></li>
+        <li><a href="/questions/cuisine">Cuisine</a></li>
+        <li><a href="/questions/science">Science</a></li>
+    </ul>
+</li>
+<li><a class="trees#if($requestURI.startsWith('/plantes')) active#end" href="/plantes">Plantes</a>
+    <ul>
+        <li><a href="/plantes/cereales">Céréales</a></li>
+        <li><a href="/plantes/arboriculture">Arboriculture</a></li>
+        <li><a href="/plantes/grande-culture">Grandes cultures</a></li>
+        <li><a href="/plantes/adventices">Adventices</a></li>
+        <li><a href="/plantes/aromatiques">Aromatiques</a></li>
+        <li><a href="/plantes/ornementales">Ornementales</a></li>
+        <li><a href="/plantes/psychotropes">Psychotropes</a></li>
+        <li><a href="/plantes/plantes-succulentes">Succulentes</a></li>
+        <li><a href="/plantes/aromatiques/vanille">Vanille</a></li>
+    </ul>
+</li>
+<li><a class="plume#if($requestURI.startsWith('/legumes')) active#end" href="/legumes">Légumes</a>
+    <ul>
+        <li><a href="/legumes/gousses">À gousses</a></li>
+        <li><a href="/legumes/feuilles">À feuilles</a></li>
+        <li><a href="/legumes/legumes-fleurs">À fleurs</a></li>
+        <li><a href="/legumes/legumes-fruits">À fruits</a></li>
+        <li><a href="/legumes/racines">À racines</a></li>
+        <li><a href="/legumes/tubercules">À tubercules</a></li>
+        <li><a href="/legumes/bulbes">À bulbes</a></li>
+        <li><a href="/legumes/gousses/haricot-vert">Haricots-verts</a></li>
+        <li><a href="/legumes/bulbes/oignon">Oignons</a></li>
+        <li><a href="/legumes/racines/carotte">Carottes</a></li>
+        <li><a href="/legumes/legumes-fruits/tomate">Tomates</a></li>
+        <li><a href="/legumes/legumes-fruits/aubergine">Aubergines</a></li>
+        <li><a href="/legumes/tubercules/pomme-de-terre">Pommes-de-terre</a></li>
+        <li><a href="/legumes/feuilles/salades">Salades</a></li>
+    </ul>
+</li>
+<li><a class="onetree" href="/fruits">Fruits</a>
+    <ul>
+        <li><a href="/fruits/arbres-fruitiers">Arbres fruitiers</a></li>
+        <li><a href="/fruits/framboisier">Framboisier</a></li>
+        <li><a href="/fruits/fraise">Fraisier</a></li>
+        <li><a href="/fruits/bananier">Bananier</a></li>
+        <li><a href="/fruits/grenadille">Fruit de la passion</a></li>
+        <li><a href="/fruits/arbres-fruitiers/agrumes">Agrumes</a></li>
+        <li><a href="/fruits/arbres-fruitiers/agrumes/citron">Citronnier</a></li>
+        <li><a href="/fruits/arbres-fruitiers/cerises">Cerisier</a></li>
+        <li><a href="/fruits/arbres-fruitiers/pommier">Pommier</a></li>
+    </ul>
+</li>
+<li><a class="plant#if($requestURI.startsWith('/techniques')) active#end" href="/techniques">Techniques</a>
+    <ul>
+        <li><a href="/techniques/machines-agricoles">Machines</a></li>
+        <li><a href="/techniques/intrants">Intrants</a></li>
+        <li><a href="/techniques/intrants/engrais">Engrais</a></li>
+        <li><a href="/techniques/intrants/fongicides">Fongicides</a></li>
+        <li><a href="/techniques/irrigation">Irrigation</a></li>
+        <li><a href="/techniques/multiplication">Multiplication</a></li>
+        <li><a href="/techniques/france">Agriculture en France</a></li>
+    </ul>
+</li>
+<li><a class="share#if($requestURI.startsWith('/sciences')) active#end" href="/sciences">Sciences</a>
+    <ul>
+        <li><a href="/sciences/familles">Familles</a></li>
+        <li><a href="/sciences/agriculture-durable">Agriculture durable</a></li>
+        <li><a href="/sciences/agriculture-intensive">Agriculture intensive</a></li>
+        <li><a href="/sciences/allelopathie-vegetale">Allélopathie végétale</a></li>
+        <li><a href="/sciences/champignons">Champignons</a></li>
+        <li><a href="/sciences/hormones-vegetales">Hormones</a></li>
+        <li><a href="/sciences/nutrition">Nutrition</a></li>
+        <li><a href="/sciences/photosynthese">Photosynthèse</a></li>
+        <li><a href="/sciences/pedofaune">Pédofaune</a></li>
+        <li><a href="/sciences/pedoflore">Pédoflore</a></li>
+    </ul>
+</li>
+<li><a class="case#if($requestURI.startsWith('/phytosanitaire')) active#end" href="/phytosanitaire">Phytosanitaire</a>
+    <ul>
+        <li><a href="/phytosanitaire/maladies">Maladies</a></li>
+        <li><a href="/phytosanitaire/parasites">Parasites</a></li>
+        <li><a href="/phytosanitaire/viroses">Viroses</a></li>
+        <li><a href="/phytosanitaire/mildiou">Mildiou</a></li>
+        <li><a href="/phytosanitaire/oidium">Oïdium</a></li>
+        <li><a href="/phytosanitaire/rouille">Rouille</a></li>
+        <li><a href="/phytosanitaire/fumagine">Fumagine</a></li>
+        <li><a href="/phytosanitaire/fusariose">Fusariose</a></li>
+        <li><a href="/phytosanitaire/galle">Galle</a></li>
+        <li><a href="/phytosanitaire/gommose">Gommose</a></li>
+        <li><a href="/phytosanitaire/moniliose">Moniliose</a></li>
+        <li><a href="/phytosanitaire/xanthomonas">Xanthomonas</a></li>
+        <li><a href="/phytosanitaire/tavelure">Tavelure</a></li>
+        <li><a href="/phytosanitaire/teigne">Teigne</a></li>
+    </ul>
+</li>
+<li><a class="eggs#if($requestURI.startsWith('/cuisine')) active#end" href="/cuisine">Cuisine</a>
+    <ul>
+        <li><a href="/cuisine/conservation">Conserver</a></li>
+        <li><a href="/cuisine/congelation">Congélation</a></li>
+        <li><a href="/cuisine/recettes">Recettes</a></li>
+        <li><a href="/cuisine/cuisson-haricot-vert">Haricots-verts</a></li>
+        <li><a href="/cuisine/cuisson-oignon">Oignons</a></li>
+        <li><a href="/cuisine/cuisson-carotte">Carottes</a></li>
+        <li><a href="/cuisine/cuisson-tomate">Tomates</a></li>
+        <li><a href="/cuisine/cuisson-aubergine">Aubergines</a></li>
+        <li><a href="/cuisine/cuisson-pomme-de-terre">Pommes-de-terre</a></li>
+        <li><a href="/cuisine/cuisson-courgette">Courgettes</a></li>
+        <li><a href="/cuisine/cuisson-du-melon">Melons</a></li>
+    </ul>
+</li>
