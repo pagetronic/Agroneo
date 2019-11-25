@@ -19,7 +19,6 @@
     </parent>
 
     <modules>
-        <module>../HubD</module>
         <module>AgroneoWeb</module>
         <module>GrowCroner</module>
     </modules>
