@@ -2,7 +2,6 @@
   "AQUARIUS": {
     "fr": "Verseau ♒",
     "en": "Aquarius ♒",
-
     "it": "Acquario ♒",
     "es": "Acuario ♒",
     "pt": "Aquário ♒",
@@ -11,7 +10,6 @@
   "ARIES": {
     "fr": "Bélier ♈",
     "en": "Aries ♈",
-
     "it": "Ariete ♈",
     "es": "Aries ♈",
     "pt": "Áries ♈",
@@ -20,7 +18,6 @@
   "CANCER": {
     "fr": "Cancer ♋",
     "en": "Cancer ♋",
-
     "it": "Cancro ♋",
     "pt": "Câncer",
     "de": "Krebs ♋",
@@ -29,7 +26,6 @@
   "CAPRICORN": {
     "fr": "Capricorne ♑",
     "en": "Capricorn ♑",
-
     "it": "Capricorno ♑",
     "es": "Capricornio ♑",
     "pt": "Capricórnio",
@@ -38,7 +34,6 @@
   "CLASSIFICATION": {
     "fr": "Classification",
     "en": "Classification",
-
     "pt": "Classificação",
     "es": "Clasificación"
   },
@@ -57,7 +52,6 @@
   "EAST": {
     "fr": "Est",
     "en": "East",
-
     "pt": "Leste",
     "es": "Este",
     "de": "Osten",
@@ -67,7 +61,6 @@
     "fr": "Famille",
     "js": true,
     "en": "Family",
-
     "es": "Familia",
     "it": "famiglia",
     "pt": "Família",
@@ -76,7 +69,6 @@
   "FIRST_CRESCENMOON": {
     "fr": "premier croissant de Lune",
     "en": "first crescent Moon",
-
     "it": "prima luna crescente",
     "es": "primera luna creciente",
     "pt": "primeira lua crescente",
@@ -85,7 +77,6 @@
   "FIRST_QUARTER_MOON": {
     "fr": "premier quartier de Lune",
     "en": "first quarter Moon",
-
     "it": "primo quarto di luna",
     "es": "primer cuarto de luna",
     "de": "erstes viertel mond",
@@ -94,7 +85,6 @@
   "FULL_MOON": {
     "fr": "pleine Lune",
     "en": "full Moon",
-
     "it": "Luna piena",
     "es": "Luna llena",
     "pt": "lua cheia",
@@ -103,7 +93,6 @@
   "GAIA_AUTHORS_DESCRIPTION": {
     "fr": "Spécimens de plantes référencées par %1.",
     "en": "Plant specimens referenced by %1.",
-
     "it": "Campioni vegetali referenziati da %1.",
     "es": "Especímenes de plantas referenciados por %1.",
     "pt": "Espécimes de plantas referenciados por %1.",
@@ -112,7 +101,6 @@
   "GAIA_AUTHORS_TITLE": {
     "fr": "Plantes de %1",
     "en": "Plants of %1",
-
     "it": "Piante di %1",
     "es": "Plantas de %1",
     "pt": "Plantas de %1",
@@ -121,14 +109,12 @@
   "GAIA_DESCRIPTION": {
     "fr": "Partager vos plantes sur Agroneo. Photos, informations et cartographie de végétaux dans un environnement ergonomique et collaboratif.",
     "en": "Share your plants on Agroneo. Photos, information and mapping of plants in an ergonomic and collaborative environment.",
-
     "pt": "Compartilhe suas plantas no Agroneo. Fotos, informações e mapeamento de plantas em um ambiente ergonômico e colaborativo.",
     "es": "Comparte tus plantas en Agroneo. Fotos, información y mapeo de plantas en un entorno ergonómico y colaborativo."
   },
   "GAIA_FAMILIES_DESCRIPTION": {
     "fr": "Repérage cartographique de spécimens de plantes avec filtrage par espèce, famille et localisation. Nous utilisons le service Google Map pour vous présenter des plantes avec leurs localisations.",
     "en": "Map location of plant specimens with species, family and location filtering. We use the Google Map service to introduce you to plants with their locations.",
-
     "it": "Mappa posizione di esemplari di piante con specie, famiglia e filtro di posizione. Utilizziamo il servizio Google Map per presentarti le piante con le loro sedi.",
     "es": "Mapa de ubicación de especímenes de plantas con especies, familia y ubicación de filtrado. Utilizamos el servicio Google Map para presentarle las plantas con sus ubicaciones.",
     "pt": "Mapear a localização de espécimes de plantas com espécies, família e filtragem de localização. Usamos o serviço do Google Map para apresentá-lo às fábricas com seus locais.",
@@ -138,7 +124,6 @@
     "fr": "Liste des familles",
     "js": true,
     "en": "List of families",
-
     "it": "Elenco delle famiglie",
     "es": "Lista de familias",
     "pt": "Lista de famílias",
@@ -147,7 +132,6 @@
   "GAIA_FAMILY_DESCRIPTION": {
     "fr": "Repérage cartographique de plantes de la famille des %1",
     "en": "Map locating of plants of the family of %1",
-
     "it": "Mappa di localizzazione delle piante della famiglia di %1",
     "es": "Mapa de localización de plantas de la familia de %1",
     "pt": "Mapa de localização de plantas da família de %1",
@@ -156,7 +140,6 @@
   "GAIA_FAMILY_TITLE": {
     "fr": "Famille des %1",
     "en": "Family of %1",
-
     "it": "Famiglia di %1",
     "es": "Familia de %1",
     "pt": "Família de %1",
@@ -165,7 +148,6 @@
   "GAIA_GENUS_DESCRIPTION": {
     "fr": "Liste des espèces du genre %1 de la famille des %2",
     "en": "List of species of the genus %1 of the %2 family",
-
     "it": "Elenco delle specie del genere %1 della famiglia %2",
     "es": "Lista de especies del género %1 de la familia %2",
     "pt": "Lista de espécies do género %1 da família %2",
@@ -175,7 +157,6 @@
     "fr": "Espèces du genre %1 (%2)",
     "js": true,
     "en": "Species of the genus %1 (%2)",
-
     "it": "Specie del genere %1 ( %2)",
     "es": "Especies del género %1 (%2)",
     "pt": "Espécies do gênero %1 (%2)",
@@ -184,13 +165,11 @@
   "GAIA_LAST_SPECIMENS": {
     "fr": "Derniers spécimens",
     "en": "Latest specimens",
-
     "pt": "Espécimes mais recentes",
     "es": "Últimas muestras"
   },
   "GAIA_MENU": {
     "en": "Plants Map",
-
     "es": "Mapa de Plantas",
     "fr": "Carte des plantes",
     "it": "Mappa delle piante",
@@ -201,14 +180,12 @@
     "fr": "Cartographie des plantes",
     "js": true,
     "en": "Plant mapping",
-
     "pt": "Mapeamento de plantas",
     "es": "Mapeo de plantas"
   },
   "GAIA_SPECIES_DESCRIPTION": {
     "fr": "Repérage cartographique de spécimens de l\u0027espèces %1 de la famille des %2.",
     "en": "Map location of specimens of species %1 from the %2 family.",
-
     "it": "Mappare la posizione degli esemplari di specie %1 dalla famiglia %2.",
     "es": "Mapa de ubicación de especímenes de la especie %1 de la familia %2.",
     "pt": "Mapear a localização de espécimes das espécies %1 da família %2.",
@@ -217,7 +194,6 @@
   "GAIA_SPECIES_FAMILY_TITLE": {
     "fr": "Espèces de la famille des %1",
     "en": "Species of the %1 family",
-
     "it": "Specie della famiglia %1",
     "es": "Especie de la familia %1",
     "pt": "Espécie da família %1",
@@ -226,7 +202,6 @@
   "GAIA_SPECIES_TITLE": {
     "fr": "Espèce %1 de la famille des %2",
     "en": "Species %1 of the %2 family",
-
     "it": "Specie %1 della famiglia %2",
     "es": "Especie %1 de la familia %2",
     "pt": "Espécie %1 da família %2",
@@ -235,7 +210,6 @@
   "GAIA_SUBSPECIES": {
     "fr": " sous-espèce ",
     "en": " subspecies ",
-
     "it": " sottospecie ",
     "es": " subespecie ",
     "pt": " subespécies ",
@@ -245,14 +219,12 @@
     "fr": "Photos, informations et cartographie des plantes",
     "js": true,
     "en": "Photos, information and mapping of plants",
-
     "pt": "Fotos, informações e mapeamento de plantas",
     "es": "Fotos, información y mapeo de plantas."
   },
   "GAIA_VARIETY": {
     "fr": " variété ",
     "en": " variety ",
-
     "it": " varietà ",
     "pt": " variedade ",
     "de": " vielfalt ",
@@ -261,7 +233,6 @@
   "GAIA_VIEW_MAP": {
     "fr": "carte interactive",
     "en": "interactive map",
-
     "it": "mappa interattiva",
     "pt": "mapa interativo",
     "de": "interaktiven Karte",
@@ -270,7 +241,6 @@
   "GEMINI": {
     "fr": "Gémeaux ♊",
     "en": "Gemini ♊",
-
     "it": "Gemelli ♊",
     "es": "Géminis ♊",
     "de": "Zwillinge ♊",
@@ -279,7 +249,6 @@
   "GENUS": {
     "fr": "genre",
     "en": "genus",
-
     "it": "genere",
     "es": "género",
     "pt": "gênero",
@@ -288,7 +257,6 @@
   "GENUSS": {
     "fr": "genres",
     "en": "genera",
-
     "it": "generi",
     "es": "géneros",
     "pt": "gêneros",
@@ -298,7 +266,6 @@
     "fr": "Intégrer",
     "js": true,
     "en": "Integrate",
-
     "it": "Integrare",
     "es": "Integrar",
     "pt": "Integrar",
@@ -307,7 +274,6 @@
   "LAST_QUARTER_MOON": {
     "fr": "dernier quartier de lune",
     "en": "last quarter Moon",
-
     "it": "ultimo quarto di luna",
     "es": "último cuarto de luna",
     "pt": "último quarto da lua",
@@ -316,7 +282,6 @@
   "LEO": {
     "fr": "Lion ♌",
     "en": "Leo ♌",
-
     "it": "Leo ♌",
     "es": "Leo ♌",
     "pt": "Leo ♌",
@@ -325,7 +290,6 @@
   "LIBRA": {
     "fr": "Balance ♎",
     "en": "Libra ♎",
-
     "it": "Bilancia ♎",
     "es": "Libra ♎",
     "de": "Waage ♎",
@@ -335,7 +299,6 @@
     "fr": "Code du lien",
     "js": true,
     "en": "Link code",
-
     "it": "Codice di collegamento",
     "es": "Código de enlace",
     "pt": "Código de ligação",
@@ -344,7 +307,6 @@
   "MOON": {
     "fr": "Lune",
     "en": "Moon",
-
     "it": "Luna",
     "es": "Luna",
     "pt": "Lua",
@@ -353,7 +315,6 @@
   "MOON_CALENDAR": {
     "fr": "Calendrier lunaire",
     "en": "Moon calendar",
-
     "it": "Calendario lunare",
     "es": "Calendario lunar",
     "pt": "Calendário lunar",
@@ -362,7 +323,6 @@
   "NEW_MOON": {
     "fr": "nouvelle Lune",
     "en": "new Moon",
-
     "it": "nuova luna",
     "es": "luna nueva",
     "pt": "lua nova",
@@ -371,7 +331,6 @@
   "NORTH": {
     "fr": "Nord",
     "en": "North",
-
     "it": "Nord",
     "pt": "Norte",
     "de": "Norden",
@@ -380,7 +339,6 @@
   "NORTHEAST": {
     "fr": "Nord-Est",
     "en": "Northeast",
-
     "es": "Noreste",
     "pt": "Nordeste",
     "de": "Nordost",
@@ -389,7 +347,6 @@
   "NORTHWEST": {
     "fr": "Nord-Ouest",
     "en": "Northwest",
-
     "it": "Nord Ovest",
     "es": "Noroeste",
     "pt": "Noroeste",
@@ -398,7 +355,6 @@
   "OF": {
     "fr": " de",
     "en": " of",
-
     "it": "di",
     "es": "de",
     "pt": "do",
@@ -407,7 +363,6 @@
   "PISCES": {
     "fr": "Poissons ♓",
     "en": "Pisces ♓",
-
     "it": "Pesci ♓",
     "es": "Piscis ♓",
     "pt": "Peixes ♓",
@@ -417,7 +372,6 @@
     "fr": "Carte des plantes sauvages",
     "js": true,
     "en": "Map of wild plants",
-
     "it": "Mappa delle piante selvatiche",
     "es": "Mapa de plantas silvestres",
     "pt": "Mapa de plantas silvestres",
@@ -426,7 +380,6 @@
   "PLANTS_MAP_MENU": {
     "fr": "Cartographie",
     "en": "Cartography",
-
     "it": "Cartografia",
     "es": "Cartografía",
     "pt": "Cartografia",
@@ -435,7 +388,6 @@
   "SAGITTARIUS": {
     "fr": "Sagittaire ♐",
     "en": "Sagittarius ♐",
-
     "it": "Sagittario ♐",
     "es": "Sagitario ♐",
     "de": "Schütze ♐",
@@ -444,7 +396,6 @@
   "SCORPIO": {
     "fr": "Scorpion ♏",
     "en": "Scorpius ♏",
-
     "it": "Scorpione ♏",
     "es": "Scorpius ♏",
     "pt": "Scorpius ♏",
@@ -456,7 +407,6 @@
     "it": "Specie",
     "de": "Spezies",
     "en": "Species",
-
     "es": "Especies",
     "pt": "Espécies"
   },
@@ -464,7 +414,6 @@
     "fr": "Partager",
     "js": true,
     "en": "Share",
-
     "it": "Condividere",
     "es": "Compartir",
     "pt": "Compartilhar",
@@ -472,7 +421,6 @@
   },
   "SITE_DESCRIPTION": {
     "en": "Application and internet database for monitoring and growing plantation.",
-
     "fr": "Application et base de données pour la plantation agricole.",
     "es": "Aplicación y base de datos de internet para monitoreo y cultivo de plantaciones.",
     "it": "Database dell\u0026#39;applicazione e di Internet per il monitoraggio e la crescita delle piantagioni.",
@@ -482,7 +430,6 @@
   "SOUTH": {
     "fr": "Sud",
     "en": "South",
-
     "it": "Sud",
     "es": "Sur",
     "pt": "Sul",
@@ -491,7 +438,6 @@
   "SOUTHEAST": {
     "fr": "Sud-Est",
     "en": "Southeast",
-
     "it": "sud-est",
     "es": "Sureste",
     "pt": "Sudeste",
@@ -500,7 +446,6 @@
   "SOUTHWEST": {
     "fr": "Sud-Ouest",
     "en": "Southwest",
-
     "it": "sud-ovest",
     "es": "Sur oeste",
     "de": "Südwesten",
@@ -509,7 +454,6 @@
   "SPECIES": {
     "fr": "espèce",
     "en": "species",
-
     "it": "specie",
     "es": "especies",
     "pt": "espécies",
@@ -518,7 +462,6 @@
   "SPECIESS": {
     "fr": "espèces",
     "en": "species",
-
     "it": "specie",
     "es": "especies",
     "pt": "espécies",
@@ -527,7 +470,6 @@
   "SPECIMEN": {
     "fr": "spécimen",
     "en": "specimen",
-
     "it": "campione",
     "es": "muestra",
     "pt": "espécime",
@@ -536,7 +478,6 @@
   "SPECIMENS": {
     "fr": "spécimens",
     "en": "specimens",
-
     "it": "campioni",
     "es": "especimenes",
     "pt": "espécimes",
@@ -545,7 +486,6 @@
   "TAURUS": {
     "fr": "Taureau ♉",
     "en": "Taurus ♉",
-
     "it": "Toro ♉",
     "es": "Tauro ♉",
     "de": "Stier ♉",
@@ -555,7 +495,6 @@
     "fr": "Lien de la vue",
     "js": true,
     "en": "Link of the view",
-
     "it": "Link della vista",
     "es": "Enlace de la vista",
     "pt": "Link da vista",
@@ -564,7 +503,6 @@
   "VIRGO": {
     "fr": "Vierge ♍",
     "en": "Virgo ♍",
-
     "it": "Vergine ♍",
     "es": "Virgo ♍",
     "pt": "Virgem ♍",
@@ -573,7 +511,6 @@
   "WANING_CRESCENMOON": {
     "fr": "dernier croissant de lune",
     "en": "waning crescent Moon",
-
     "it": "Luna calante crescente",
     "es": "Luna menguante",
     "pt": "minguante lua crescente",
@@ -582,7 +519,6 @@
   "WANING_GIBBOUS_MOON": {
     "fr": "lune gibbeuse décroissante",
     "en": "waning gibbous Moon",
-
     "it": "Luna calante gibbosa",
     "es": "Luna gibosa menguante",
     "de": "Abnehmender Mond",
@@ -591,7 +527,6 @@
   "WAXING_GIBBOUS_MOON": {
     "fr": "Lune gibbeuse croissante",
     "en": "waxing gibbous Moon",
-
     "it": "Luna gibbosa crescente",
     "es": "Luna gibosa depilación",
     "pt": "lua crescente gibbous",
@@ -600,7 +535,6 @@
   "WEST": {
     "fr": "Ouest",
     "en": "West",
-
     "es": "Oeste",
     "it": "Ovest",
     "pt": "Oeste",
