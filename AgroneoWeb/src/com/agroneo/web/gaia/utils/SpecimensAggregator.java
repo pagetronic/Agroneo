@@ -9,10 +9,10 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.UnwindOptions;
 import live.page.web.system.db.Aggregator;
 import live.page.web.system.db.Db;
-import live.page.web.system.db.Pipeliner;
 import live.page.web.content.users.UsersAggregator;
 import live.page.web.content.congrate.RatingsTools;
 import live.page.web.system.Settings;
+import live.page.web.system.db.PipelinerStore;
 import live.page.web.system.json.Json;
 import live.page.web.system.db.paginer.Paginer;
 import live.page.web.system.cosmetic.svg.SVGTemplate;
@@ -147,7 +147,7 @@ public class SpecimensAggregator {
 		return pipeline;
 	}
 
-	public static class SearchSpecimensPipeline extends Pipeliner {
+	public static class SearchSpecimensPipeline extends PipelinerStore.Pipeliner {
 
 		public SearchSpecimensPipeline(String type, String lng, Paginer paginer) {
 			super(type, paginer);

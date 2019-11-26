@@ -4,7 +4,7 @@
 package com.agroneo.web;
 
 import com.agroneo.web.gaia.utils.SpecimensAggregator;
-import live.page.web.system.db.tags.DbTagsUtils;
+import live.page.web.system.db.PipelinerStore;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -15,7 +15,7 @@ public class AgroneoPipeliner implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		DbTagsUtils.addPipeliner("specimens", SpecimensAggregator.SearchSpecimensPipeline.class);
+		PipelinerStore.addPipeliner("specimens", SpecimensAggregator.SearchSpecimensPipeline.class);
 	}
 
 	@Override
