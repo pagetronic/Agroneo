@@ -4,7 +4,7 @@
 package com.agroneo.web;
 
 import com.agroneo.web.gaia.utils.SpecimensAggregator;
-import live.page.web.utils.db.ObjsUtils;
+import live.page.web.system.db.ObjsUtils;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

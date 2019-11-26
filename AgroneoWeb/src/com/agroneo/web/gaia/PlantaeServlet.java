@@ -7,7 +7,7 @@ import com.agroneo.web.gaia.utils.ClassificationUtils;
 import com.agroneo.web.gaia.utils.SpecimensAggregator;
 import live.page.web.system.servlet.wrapper.WebServletRequest;
 import live.page.web.system.servlet.wrapper.WebServletResponse;
-import live.page.web.utils.langs.Language;
+import live.page.web.system.Language;
 
 import java.io.IOException;
 
