@@ -3,8 +3,8 @@
  */
 package com.agroneo.web.db;
 
-import live.page.web.db.IndexBuilder;
-import live.page.web.db.IndexBuilder.IndexData;
+import live.page.web.utils.db.IndexBuilder;
+import live.page.web.utils.db.IndexBuilder.IndexData;
 import live.page.web.utils.Settings;
 import live.page.web.utils.json.Json;
 

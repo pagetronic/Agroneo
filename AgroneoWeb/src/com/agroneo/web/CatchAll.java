@@ -3,10 +3,10 @@
  */
 package com.agroneo.web;
 
-import live.page.web.db.Db;
-import live.page.web.servlet.BaseServlet;
-import live.page.web.servlet.wrapper.BaseServletRequest;
-import live.page.web.servlet.wrapper.BaseServletResponse;
+import live.page.web.utils.db.Db;
+import live.page.web.system.servlet.BaseServlet;
+import live.page.web.system.servlet.wrapper.BaseServletRequest;
+import live.page.web.system.servlet.wrapper.BaseServletResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

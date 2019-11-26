@@ -9,12 +9,12 @@ import com.agroneo.web.gaia.SpecimensServlet;
 import com.agroneo.web.gaia.utils.ClassificationUtils;
 import com.agroneo.web.gaia.utils.GaiaGeoUtils;
 import com.mongodb.client.model.Filters;
-import live.page.web.db.Db;
-import live.page.web.servlet.HttpServlet;
-import live.page.web.servlet.wrapper.ApiServletRequest;
-import live.page.web.servlet.wrapper.ApiServletResponse;
-import live.page.web.servlet.wrapper.WebServletRequest;
-import live.page.web.servlet.wrapper.WebServletResponse;
+import live.page.web.utils.db.Db;
+import live.page.web.system.servlet.HttpServlet;
+import live.page.web.system.servlet.wrapper.ApiServletRequest;
+import live.page.web.system.servlet.wrapper.ApiServletResponse;
+import live.page.web.system.servlet.wrapper.WebServletRequest;
+import live.page.web.system.servlet.wrapper.WebServletResponse;
 import live.page.web.utils.Settings;
 import live.page.web.utils.json.Json;
 
