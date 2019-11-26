@@ -194,7 +194,7 @@ public class SpecimensAggregator {
 
 
 		@Override
-		public List<Bson> getUrlizifier(Aggregator grouper, String key) {
+		public List<Bson> getUrlDbTags(Aggregator grouper, String key) {
 
 			List<Bson> pipeline = new ArrayList<>();
 
