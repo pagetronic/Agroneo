@@ -1,5 +1,4 @@
 
-
 #gaia {
     position: absolute;
     background: #EEE;
@@ -276,6 +275,7 @@ noscript.nojs p.blink:before {
 
     border-bottom: 2px solid #FFF;
 }
+
 .gaia_photos .coll .image {
     border: 2px solid #FFF;
     border-left: none;
@@ -323,4 +323,29 @@ noscript.nojs p.blink:before {
 
 p.src a {
     border: none;
+}
+
+.specimen .gaia_photos img {
+    max-width: 100%;
+    width: 100% !important;
+    height: auto !important;
+    border-bottom: 2px solid #FFF;
+}
+
+.specimen .gaia_photos .image {
+    flex: 1 1 24%;
+    max-width: 500px;
+    border: 1px solid #FFF;
+}
+
+@media all and (max-width: 700px) {
+    .specimen .gaia_photos .image {
+        flex: 1 1 33%;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .specimen .gaia_photos .image {
+        flex: 1 1 100%;
+    }
 }

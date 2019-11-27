@@ -1,187 +1,172 @@
 #parse("/inc/top.html")
-<div id="middle" class="gaia selectable scrollable">
-	#parse("/inc/breadcrumb.html")
-	<noscript class="nojs">
-		<p class="blink"></p>
-	</noscript>
-	<div class=" cooltxt" itemid="$specimen.id" itemscope="" itemtype="https://schema.org/Place">
-		<h1 itemprop="name">#gaiatitle($specimen.title)</h1>
-		#parse('/gaia/infos.html')
-		#if($debug)
-			#foreach($lang in $langs_domains)
-			<p itemprop="description"><strong>#lang("COUNTRY",$lang.key):</strong>
-				$Fxm.translate($specimen.text,$lang.key)
-			</p>
-			#end
+<div id="middle" class="gaia selectable specimen">
+    #parse("/inc/breadcrumb.html")
+    <noscript class="nojs">
+        <p class="blink"></p>
+    </noscript>
+    <div class=" cooltxt" itemid="$specimen.id" itemscope="" itemtype="https://schema.org/Place">
+        <h1 itemprop="name">#gaiatitle($specimen.title)</h1>
+        #parse('/gaia/infos.html')
+        #if($debug)
+        #foreach($lang in $langs_domains)
+        <p itemprop="description"><strong>#lang("COUNTRY",$lang.key):</strong>
+            $Fxm.translate($specimen.text,$lang.key)
+        </p>
+        #end
 
-		#end
-		<em class="infos">#date($specimen.date) (#since($specimen.date,2))#if($specimen.update), #lang('UPDATED', "#since($specimen.update, 2 )")#end</em>
-		#if($specimen.text)
-			<header>$specimen.text</header>
-		#end
-		<meta itemprop="hasMap" content="$http_site/gaia#$specimen.location.coordinates[1];$specimen.location.coordinates[0];16;$specimen.id;;"/>
-			#if($specimen.images.size()>0)
-			<div class="gaia_photos" style="flex-wrap:wrap">
-				#foreach($image in $specimen.images)
-				#if($velocityCount==0)
-				#set($modulo=0)
-				<div class="first">#set($open=true)
-					#else
-					#set($modulo=$velocityCount %2)
-					#if($modulo == 1)
-					<div class="coll">#set($open=true)
-						#end
-						#end
-						<div class="image" itemprop="photo" itemscope="" itemtype="https://schema.org/ImageObject">
-							<a href="$image.url" itemprop="image" class="popimage">
-								#if($velocityCount==0)
-								<img itemprop="thumbnail" src="$image.url@400x200.jpg" width="400" height="200"/>
-								#else
-								#if($velocityLast && $modulo == 1)
-								<img itemprop="thumbnail" src="$image.url@180x200.jpg" width="180" height="200"/>
-								#else
-								<img itemprop="thumbnail" src="$image.url@180x99.jpg" width="180" height="99"/>
-								#end
-								#end
-								<meta itemprop="dateCreated" content="$Fx.isoDate($specimen.date)"/>
-								#if($specimen.update)<meta itemprop="dateUpdated" content="$Fx.isoDate($specimen.update)"/>#end
-								#if($image.text)<span itemprop="caption">$image.text.replace('©','<br/>©')</span>#end
-							</a>
-						</div>
-						#if($open && $modulo == 0)#set($open=false)
-					</div>
-					#end
-					#end
-					#if($open)#set($open=false)
-				</div>
-				#end
-			</div>
-			#end
-		<div class="both"></div>
+        #end
+        <em class="infos">#date($specimen.date) (#since($specimen.date,2))#if($specimen.update), #lang('UPDATED', "#since($specimen.update, 2 )")#end</em>
+        #if($specimen.text)
+        <header>$specimen.text</header>
+        #end
+        <meta itemprop="hasMap" content="$http_site/gaia#$specimen.location.coordinates[1];$specimen.location.coordinates[0];16;$specimen.id;;"/>
+        #if($specimen.images.size()>0)
+        #foreach($image in $specimen.images)#set($modulo=$velocityCount %5)
+        #if($modulo == 0)
+        <div class="gaia_photos" style="flex-wrap:wrap">
+            #end
+            <div class="image" itemprop="photo" itemscope="" itemtype="https://schema.org/ImageObject">
+                <a href="$image.url" itemprop="image" class="popimage">
+                    <img itemprop="thumbnail" src="$image.url@500x300.jpg"/>
+                    <meta itemprop="dateCreated" content="$Fx.isoDate($specimen.date)"/>
+                    #if($specimen.update)
+                    <meta itemprop="dateUpdated" content="$Fx.isoDate($specimen.update)"/>
+                    #end
+                    #if($image.text)<span itemprop="caption">$image.text.replace('©','<br/>©')</span>#end
+                </a>
+            </div>
+            #if($modulo == 4 || $velocityLast)
+        </div>
+        #end
+        #end
+        #end
+        <div class="both"></div>
 
-		<div class="rating" rating="Specimens($specimen.id)"#if($specimen.review && $specimen.review.count>0) itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"#end>
-			#if($specimen.review && $specimen.review.count>0)
-			<span itemprop="ratingValue" class="value">$specimen.review.value</span>
-			<span itemprop="ratingCount" class="count">$specimen.review.count</span>
-			<span itemprop="bestRating">5</span>
-			<span itemprop="worstRating">1</span>
-			#end
-		</div>
-		#if($specimen.users)
-		#if($specimen.users.size()==1)
-		<p><strong>#lang('AUTHOR'):</strong> <a href="$specimen.users[0].url">$specimen.users[0].name</a></p>
-		#else
-		<p><strong>#lang('AUTHORS'):</strong>
-			<ul>#foreach($user in $specimen.users)
-				<li><a href="$user.url">$user.name</a></li>
-				#end
-			</ul>
-		</p>
-		#end
-		#end
-		<p><strong>#lang('CLASSIFICATION'):</strong>
-			<ul>
-				<li>#lang('FAMILY','ucfirst'): <a href="$specimen.family.url">$specimen.family.name</a></li>
-				<li>#lang('GENUS','ucfirst'): <a href="$specimen.genus.url">$specimen.genus.name</a></li>
-				<li>#lang('SPECIES','ucfirst'): <a href="$specimen.species.url">$specimen.species.name</a></li>
-			</ul>
-		</p>
-		#if($specimen.location)
-		<p itemprop="geo" itemscope="" itemtype="https://schema.org/GeoCoordinates">
-			<meta itemprop="latitude" content="$specimen.location.coordinates[1]"/>
-			<meta itemprop="longitude" content="$specimen.location.coordinates[0]"/>
-			<strong>#lang('LOCALISATION','ucfirst'):</strong>
-			<a title="#lang('GAIA_VIEW_MAP')" class="mp" href="#$specimen.location.coordinates[1];$specimen.location.coordinates[0];7;$specimen.id;;" onclick="gaia.init()"><img src="$http_cdn/ui/maps@23x23" width="23" height="23"/></a>
-			$Fxm.convertDMS($specimen.location)
-		</p>
-		#end
-		#if($specimen.tropicos)
-		<p class="src">
-			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="$http_cdn/ui/cc-by-sa@68x23" width="68" height="23"/></a>
-			<a itemprop="sameAs" href="$specimen.tropicos" target="_blank"><img src="$http_cdn/ui/tropicos@109x23" width="109" height="23"/></a>
-		</p>
-		#end
+        <div class="rating" rating="Specimens($specimen.id)" #if($specimen.review && $specimen.review.count>0) itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"#end>
+            #if($specimen.review && $specimen.review.count>0)
+            <span itemprop="ratingValue" class="value">$specimen.review.value</span>
+            <span itemprop="ratingCount" class="count">$specimen.review.count</span>
+            <span itemprop="bestRating">5</span>
+            <span itemprop="worstRating">1</span>
+            #end
+        </div>
+        #if($specimen.users)
+        #if($specimen.users.size()==1)
+        <p><strong>#lang('AUTHOR'):</strong> <a href="$specimen.users[0].url">$specimen.users[0].name</a></p>
+        #else
+        <p><strong>#lang('AUTHORS'):</strong>
+        <ul>#foreach($user in $specimen.users)
+            <li><a href="$user.url">$user.name</a></li>
+            #end
+        </ul>
+        </p>
+        #end
+        #end
+        <p><strong>#lang('CLASSIFICATION'):</strong>
+        <ul>
+            <li>#lang('FAMILY','ucfirst'): <a href="$specimen.family.url">$specimen.family.name</a></li>
+            <li>#lang('GENUS','ucfirst'): <a href="$specimen.genus.url">$specimen.genus.name</a></li>
+            <li>#lang('SPECIES','ucfirst'): <a href="$specimen.species.url">$specimen.species.name</a></li>
+        </ul>
+        </p>
+        #if($specimen.location)
+        <p itemprop="geo" itemscope="" itemtype="https://schema.org/GeoCoordinates">
+            <meta itemprop="latitude" content="$specimen.location.coordinates[1]"/>
+            <meta itemprop="longitude" content="$specimen.location.coordinates[0]"/>
+            <strong>#lang('LOCALISATION','ucfirst'):</strong>
+            <a title="#lang('GAIA_VIEW_MAP')" class="mp" href="#$specimen.location.coordinates[1];$specimen.location.coordinates[0];7;$specimen.id;;" onclick="gaia.init()"><img src="$http_cdn/ui/maps@23x23" width="23" height="23"/></a>
+            $Fxm.convertDMS($specimen.location)
+        </p>
+        #end
+        #if($specimen.tropicos)
+        <p class="src">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="$http_cdn/ui/cc-by-sa@68x23" width="68" height="23"/></a>
+            <a itemprop="sameAs" href="$specimen.tropicos" target="_blank"><img src="$http_cdn/ui/tropicos@109x23" width="109" height="23"/></a>
+        </p>
+        #end
 
-		<div class="both"></div>
+        <div class="both"></div>
 
-	</div>
-	#if($posts.paging.next || $posts.paging.prev)
-		<div class="pagination">
-			#pagination($posts.paging)
-		</div>
-	#end
-	<div class="posts">
+    </div>
+    #if($posts.paging.next || $posts.paging.prev)
+    <div class="pagination">
+        #pagination($posts.paging)
+    </div>
+    #end
+    <div class="posts">
 
-		#foreach( $post in $posts.result )
-		#parse("/threads/post_item.html")
-		#end
-		<div id="pushadd"></div>
-		<div class="post" id="reply">
-			<em>#lang('POST_COMMENT')</em>
-			<a href="#if( $user )${user.url}#else/profile#end" class="avatar">
-				#if($user.avatar)
-				$Fx.avatar($user.avatar)
-				#else
-				$Fx.avatar("$ui_logo")
-				#end
-			</a>
-			<div class="boxarea">
-				#if(!$user)
-				<div class="login">
-					<h3>#lang('ACCOUNT_OAUTH')</h3>
-					<div class="flexible flexo" style="margin-top: 5px">
-						#parse("/profile/oauth.html")
-						<a class="button flexable" href="/profile">$svg.fa_icon_user_circle_o
-							#lang('ACCOUNT_CREATE','lowercase')</a>
-					</div>
-				</div>
-				#else
-				<input type="hidden" name="parent" value="Specimens($specimen.id)"/>
-				#end
-			</div>
+        #foreach( $post in $posts.result )
+        #parse("/threads/post_item.html")
+        #end
+        <div id="pushadd"></div>
+        <div class="post" id="reply">
+            <em>#lang('POST_COMMENT')</em>
+            <a href="#if( $user )${user.url}#else/profile#end" class="avatar">
+                #if($user.avatar)
+                $Fx.avatar($user.avatar)
+                #else
+                $Fx.avatar("$ui_logo")
+                #end
+            </a>
+            <div class="boxarea">
+                #if(!$user)
+                <div class="login">
+                    <h3>#lang('ACCOUNT_OAUTH')</h3>
+                    <div class="flexible flexo" style="margin-top: 5px">
+                        #parse("/profile/oauth.html")
+                        <a class="button flexable" href="/profile">$svg.fa_icon_user_circle_o
+                            #lang('ACCOUNT_CREATE','lowercase')</a>
+                    </div>
+                </div>
+                #else
+                <input type="hidden" name="parent" value="Specimens($specimen.id)"/>
+                #end
+            </div>
 
-		</div>
-	</div>
-	<div class="pagination">
-		<button follow="Specimens($specimen.id)">$svg.mi_notifications_none#lang('FOLLOW')</button>
-	</div>
-	<script type="text/javascript">
-		sys.push(function () {
-			sys.specimens.init('$specimen.id');
-		});
-		if (self !== top) {
-			sys.push(function () {
-				gaia.init();
-			});
-		}
-	</script>
+        </div>
+    </div>
+    <div class="pagination">
+        <button follow="Specimens($specimen.id)">$svg.mi_notifications_none#lang('FOLLOW')</button>
+    </div>
+    <script type="text/javascript">
+        sys.push(function () {
+            sys.specimens.init('$specimen.id');
+        });
+        if (self !== top) {
+            sys.push(function () {
+                gaia.init();
+            });
+        }
+    </script>
 
-	<div class="publisher" itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
-		#lang('PUBLICATION_DIRECTOR'):
-		<span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="https://laurent.page.live/logo.png" /></span>
-		<span itemprop="name">Laurent PAGE</span>, #lang('EMAIL'): <span itemprop="email">laurent@page.live</span>, #lang('PHONE'): <span itemprop="telephone">+262 262 92 66 38</span>, <span itemprop="url">https://page.live/</span>
-	</div>
+    <div class="publisher" itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+        #lang('PUBLICATION_DIRECTOR'):
+        <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="https://laurent.page.live/logo.png"/></span>
+        <span itemprop="name">Laurent PAGE</span>, #lang('EMAIL'): <span itemprop="email">laurent@page.live</span>, #lang('PHONE'): <span itemprop="telephone">+262 262 92 66 38</span>, <span itemprop="url">https://page.live/</span>
+    </div>
 </div>
 
 #if($specimens.result)
 <div id="lateral">
-	<ul class="links">
-		<li class="hr">#lang('GAIA_LAST_SPECIMENS') ($specimen.species.name)</li>
-		#foreach($specimen in $specimens.result)
-		<li><a itemprop="sameAs" href="$specimen.url">#if($specimen.images.size()>0)<img src="$specimen.images[0].url@40x25.jpg" width="40" height="25" />#end
-			#gaiatitle($specimen.title) <em>#date($specimen.date)</em>
-			#if($specimen.text)<span>$Fx.truncate($specimen.text, 150)</span>#end
-		</a>
-		</li>
-		#end
-	</ul>
-	<div class="pagination">
-		<a href="$specimen.species.url">$svg.fa_icon_leaf<txt>&nbsp;#lang('GAIA_LAST_SPECIMENS','lowercase') ($specimen.species.name)</txt></a>
-		#if($specimens.paging.next)
-		<a href="$specimen.species.url?paging=$specimens.paging.next">#lang('NEXT')$svg.mi_navigate_next</a>
-		<a href="$specimen.species.url?paging=last">$svg.mi_fast_forward</a>
-		#end
-	</div>
+    <ul class="links">
+        <li class="hr">#lang('GAIA_LAST_SPECIMENS') ($specimen.species.name)</li>
+        #foreach($specimen in $specimens.result)
+        <li><a itemprop="sameAs" href="$specimen.url">#if($specimen.images.size()>0)<img src="$specimen.images[0].url@40x25.jpg" width="40" height="25"/>#end
+            #gaiatitle($specimen.title) <em>#date($specimen.date)</em>
+            #if($specimen.text)<span>$Fx.truncate($specimen.text, 150)</span>#end
+        </a>
+        </li>
+        #end
+    </ul>
+    <div class="pagination">
+        <a href="$specimen.species.url">$svg.fa_icon_leaf
+            <txt>&nbsp;#lang('GAIA_LAST_SPECIMENS','lowercase') ($specimen.species.name)</txt>
+        </a>
+        #if($specimens.paging.next)
+        <a href="$specimen.species.url?paging=$specimens.paging.next">#lang('NEXT')$svg.mi_navigate_next</a>
+        <a href="$specimen.species.url?paging=last">$svg.mi_fast_forward</a>
+        #end
+    </div>
 </div>
 #end
 #parse("/inc/bottom.html")
