@@ -9,14 +9,15 @@ import com.agroneo.web.gaia.SpecimensServlet;
 import com.agroneo.web.gaia.utils.ClassificationUtils;
 import com.agroneo.web.gaia.utils.GaiaGeoUtils;
 import com.mongodb.client.model.Filters;
+import live.page.web.system.Settings;
 import live.page.web.system.db.Db;
+import live.page.web.system.json.Json;
 import live.page.web.system.servlet.HttpServlet;
+import live.page.web.system.servlet.utils.Api;
 import live.page.web.system.servlet.wrapper.ApiServletRequest;
 import live.page.web.system.servlet.wrapper.ApiServletResponse;
 import live.page.web.system.servlet.wrapper.WebServletRequest;
 import live.page.web.system.servlet.wrapper.WebServletResponse;
-import live.page.web.system.Settings;
-import live.page.web.system.json.Json;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Api(scope = "gaia")
 @WebServlet(name = "Gaia Servlet", urlPatterns = {"/gaia", "/gaia/*"})
 public class GaiaServlet extends HttpServlet {
 

@@ -3,8 +3,8 @@
  */
 package com.agroneo;
 
-import com.agroneo.tropicos.ia.TropicosIA;
 import com.agroneo.tropicos.api.TropicosApi;
+import com.agroneo.tropicos.ia.TropicosIA;
 import live.page.notice.Notices;
 import live.page.web.utils.Fx;
 

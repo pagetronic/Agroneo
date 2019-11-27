@@ -98,6 +98,10 @@
     "pt": "Espécimes de plantas referenciados por %1.",
     "de": "Pflanzenproben von %1 referenziert."
   },
+  "SCOPE_GAIA_EXPLAIN": {
+    "fr": "accès à la création de spécimens",
+    "en": "access to specimens creation"
+  },
   "GAIA_AUTHORS_TITLE": {
     "fr": "Plantes de %1",
     "en": "Plants of %1",

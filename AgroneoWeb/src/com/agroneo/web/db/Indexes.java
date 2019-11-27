@@ -3,9 +3,9 @@
  */
 package com.agroneo.web.db;
 
+import live.page.web.system.Settings;
 import live.page.web.system.db.IndexBuilder;
 import live.page.web.system.db.IndexBuilder.IndexData;
-import live.page.web.system.Settings;
 import live.page.web.system.json.Json;
 
 import javax.servlet.annotation.WebListener;
