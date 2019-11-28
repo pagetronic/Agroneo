@@ -22,5 +22,8 @@
         <module>AgroneoWeb</module>
         <module>GrowCroner</module>
     </modules>
+    <build>
+        <defaultGoal>install</defaultGoal>
+    </build>
 
 </project>
