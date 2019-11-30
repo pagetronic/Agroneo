@@ -472,7 +472,9 @@ public class TropicosApi {
 
 	private static void error(String err) throws InterruptedException {
 		Fx.log(err);
-		pause += pause;
+		if (pause < 60 * 60 * 1000) {
+			pause += pause;
+		}
 		Thread.sleep(pause);
 	}
 
