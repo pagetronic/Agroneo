@@ -40,7 +40,7 @@ public class TropicosApi {
 
 
 	public static void run() {
-		Fx.log("TropicosIA Api started " + new Date().toString());
+		Fx.log("Tropicos Api started " + new Date().toString());
 		control.submit(() -> {
 			Thread.currentThread().setName("tropicos-shuddle");
 			try {
@@ -51,7 +51,7 @@ public class TropicosApi {
 					Thread.sleep(pause);
 				}
 			} catch (InterruptedException e) {
-				Fx.log("TropicosIA Api stopped " + new Date().toString());
+				Fx.log("Tropicos Api stopped " + new Date().toString());
 			}
 		});
 	}
@@ -59,7 +59,7 @@ public class TropicosApi {
 
 	private static void lastNames() throws InterruptedException {
 
-		Fx.log("TropicosIA Api lastNames");
+		Fx.log("Tropicos Api lastNames");
 		Json lastspecies = Db.find("Species").sort(Sorts.descending("tId")).first();
 		int startid = 0;
 		if (lastspecies != null) {
@@ -84,7 +84,7 @@ public class TropicosApi {
 			throw new InterruptedException("");
 		}
 
-		Fx.log("TropicosIA Api updateName");
+		Fx.log("Tropicos Api updateName");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -6);
 		List<Json> species = Db.find("Species",
@@ -192,7 +192,7 @@ public class TropicosApi {
 			Db.save("Specimens", specimens);
 			specimens.forEach(TropicosIA::updateSpecimen);
 			System.out.println();
-			Fx.log("TropicosIA : " + nameid + " / " + specimens.size() + " specimens");
+			Fx.log("Tropicos : " + nameid + " / " + specimens.size() + " specimens");
 
 			//TODO do that !
 			specimens.forEach((specimen) -> notify(
@@ -286,7 +286,7 @@ public class TropicosApi {
 		List<Json> images = new ArrayList<>();
 		JsonArray listImages = getTropicos("Name/" + nameId + "/Images").getAsJsonArray();
 		if (listImages == null) {
-			error("TropicosIA error Images " + nameId);
+			error("Tropicos error Images " + nameId);
 			return null;
 		}
 
@@ -311,7 +311,7 @@ public class TropicosApi {
 				}
 			}
 		} else if (!listImages.get(0).getAsJsonObject().get("Error").getAsString().equals("No records were found")) {
-			error("TropicosIA error Images " + nameId);
+			error("Tropicos error Images " + nameId);
 			return null;
 		}
 		return images;
@@ -341,7 +341,7 @@ public class TropicosApi {
 			JsonObject data_specimen = getTropicos("Specimen/" + specimenId).getAsJsonObject();
 
 			if (data_specimen == null) {
-				error("TropicosIA error Specimen " + specimenId);
+				error("Tropicos error Specimen " + specimenId);
 				return null;
 			}
 
@@ -413,7 +413,7 @@ public class TropicosApi {
 		List<String> synonyms = new ArrayList<>();
 		JsonArray synonymstp = getTropicos("Name/" + nameId + "/Synonyms").getAsJsonArray();
 		if (synonymstp == null) {
-			error("TropicosIA error Synonyms " + nameId);
+			error("Tropicos error Synonyms " + nameId);
 			return null;
 		}
 		for (JsonElement nameIdObj : synonymstp) {
@@ -431,7 +431,7 @@ public class TropicosApi {
 		List<String> accepted = new ArrayList<>();
 		JsonArray acceptedstp = getTropicos("Name/" + nameId + "/AcceptedNames").getAsJsonArray();
 		if (acceptedstp == null) {
-			error("TropicosIA error AcceptedNames " + nameId);
+			error("Tropicos error AcceptedNames " + nameId);
 			return null;
 		}
 		for (JsonElement nameIdObj : acceptedstp) {
