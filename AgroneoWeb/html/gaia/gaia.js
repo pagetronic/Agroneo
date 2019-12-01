@@ -4,7 +4,7 @@ var gaia = {
         var map = $('<div id="gaia"/>');
         $('#middle').append(map);
         var inmap = $('<div class="inmap"/>');
-        map.html(inmap)
+        map.html(inmap);
         inmap.html(sys.loading(60, 'div').css({marginTop: 50}));
         if (self !== top) {
             $('#menu, #lateral').remove();
