@@ -11,7 +11,7 @@
                     <img src="$userdata.avatar@100x100" alt="avatar" width="100" height="100"/>
                 </picture>
             </div>
-            #if($user.id==$userdata.id || $user.editor)
+            #if($user && $user.id==$userdata.id)
             <script type="text/javascript">
                 sys.push(function () {
                     sys.profile.avatar($('#avatar'));
