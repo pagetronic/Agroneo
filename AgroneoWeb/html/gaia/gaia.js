@@ -16,8 +16,16 @@ var gaia = {
         }
         var loading = sys.loading(40);
         inmap.html(loading);
+        sys.comodo.hide();
 
-        $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBI3aiKNQg_HvHrF7tHKvEfeCPuFNRRsP8', function () {
+        $.getScript('https://maps.googleapis.com/maps/api/js?' +
+            'key=' +
+            'AIzaSy' +
+            'BI3aiKN' +
+            'Qg_HvHrF7' +
+            'tHK' +
+            'vEfeCPuFNR' +
+            'RsP8', function () {
             loading.remove();
             $('#middle').scrollTo(0);
             gaia.load(inmap);
@@ -47,8 +55,8 @@ var gaia = {
             }
         };
         var sync = $('<div class="sync"/>');
-        var speciess = $('<select placeholder="' + lang.get('SEARCH_SPECIES') + '" url="/gaia"/>');
-        var families = $('<select placeholder="' + lang.get('FAMILY') + '" url="/gaia?families"/>');
+        var speciess = $('<select url="/gaia"/>').attr('placeholder', lang.get('SEARCH_SPECIES'));
+        var families = $('<select url="/gaia?families"/>').attr('placeholder', lang.get('FAMILY'));
 
         var init_url = gaia.getUrl();
 
@@ -95,25 +103,6 @@ var gaia = {
             event: 'mouseover'
         });
 
-
-        var convertDMS = function (lat, lng) {
-            var tdms = function (coordinate) {
-                var absolute = Math.abs(coordinate);
-                var degrees = Math.floor(absolute);
-                var minutesNotTruncated = (absolute - degrees) * 60;
-                var minutes = Math.floor(minutesNotTruncated);
-                var seconds = Math.floor((minutesNotTruncated - minutes) * 60);
-
-                return degrees + "°" + minutes + '’' + seconds + '”';
-            }
-            var latitude = tdms(lat);
-            var latitudeCardinal = Math.sign(lat) >= 0 ? "N" : "S";
-
-            var longitude = tdms(lng);
-            var longitudeCardinal = Math.sign(lng) >= 0 ? "E" : "W";
-
-            return latitude + latitudeCardinal + ' ' + longitude + longitudeCardinal;
-        };
 
         var loadMarker = function (marker) {
             if (marker.bounds !== undefined) {
@@ -177,7 +166,7 @@ var gaia = {
                 desc.append($('<p/>').html(specimen.desc));
             }
 
-            desc.append($('<p/>').attr('title', specimen.location.coordinates[1] + ',' + specimen.location.coordinates[0]).html(convertDMS(specimen.location.coordinates[1], specimen.location.coordinates[0])));
+            desc.append($('<p/>').attr('title', specimen.location.coordinates[1] + ',' + specimen.location.coordinates[0]).html(gaia.convertDMS(specimen.location.coordinates[1], specimen.location.coordinates[0])));
 
             desc.append($('<p/>').html(specimen.author));
 
@@ -197,7 +186,6 @@ var gaia = {
             info.open(map, marker);
 
         };
-
 
         var loadData = function (data, fit) {
 
@@ -461,6 +449,9 @@ var gaia = {
     },
     ui: function (map, sync) {
         window.map = map;
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push($('<a class="cmdmap"/>').html('$svg.fa_icon_close').on('click', function () {
+            ajax.reload(false);
+        })[0]);
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push($('<a class="cmdmap"/>').attr('title', lang.get('SHARE')).html('$svg.fa_icon_share_alt_square').on('click', function () {
             var popin = pop();
             var cnt = $('<div />');
@@ -494,8 +485,6 @@ var gaia = {
             window.open('https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.location.href), '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=400,resizable=yes').focus();
         })).append($('<a class="twitter"/>').attr('title', lang.get('SHARE')).html('$svg.fa_icon_twitter').on('click', function () {
             window.open('https://twitter.com/intent/tweet/?url=' + encodeURIComponent(document.location.href) + '&text=' + encodeURIComponent(document.title), '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=400,resizable=yes').focus();
-        })).append($('<a class="google"/>').attr('title', lang.get('SHARE')).html('$svg.fa_icon_google_plus_square').on('click', function () {
-            window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.location.href) + '&text=' + encodeURIComponent(document.title), '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=600,resizable=yes').focus();
         })).append($('<a class="paypal"/>').attr('title', 'PayPal').html('$svg.fa_icon_paypal').on('click', function () {
             window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8TULTLMAYUVL8', '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=700,resizable=yes').focus();
             return false;
@@ -523,7 +512,10 @@ var gaia = {
         try {
             var path = document.location.pathname.toString();
             var current = document.location.hash.split(/[#;]/);
-            var species_regex = /^\/gaia\/([a-z0-9]+)\/([a-z0-9\-]+)$/;
+
+            var specimen_regex = /^\/gaia\/([a-z0-9]+)\/([^/]+)\/(.*)/;
+            var specimen = path.match(specimen_regex) ? path.replace(specimen_regex, '$3') : null;
+            var species_regex = /^\/gaia\/([a-z0-9]+)\/([^/]+).*/;
             var species = path.match(species_regex) ? path.replace(species_regex, '$2') : null;
             var family_regex = /^\/gaia\/([a-z0-9]+).*/;
             var family = path.match(family_regex) ? path.replace(family_regex, '$1') : null;
@@ -534,13 +526,14 @@ var gaia = {
                 marker: (current.length >= 5) ? current[4] : '',
                 mapType: (current.length >= 6) ? current[5] : '',
                 species: species !== null ? species : '',
-                family: family !== null ? family : ''
+                family: family !== null ? family : '',
+                specimen: specimen != null ? specimen : ''
             };
         } catch (e) {
             return {};
         }
     },
-    setUrl: function (lat, lng, zoom, marker, mapType, species, family) {
+    setUrl: function (lat, lng, zoom, marker, mapType, species, family, specimen) {
         var data = gaia.getUrl();
         var url = '/gaia';
 
@@ -551,9 +544,16 @@ var gaia = {
         }
 
         if (species !== null && species !== undefined && species !== '') {
-            url += '/' + species;
+            url += '/' + species.split('-');
         } else if (species !== '' && data.species !== '') {
             url += '/' + data.species;
+        }
+        if (url.split('/').length === 4) {
+            if (specimen !== null && specimen !== undefined && specimen !== '') {
+                url += '/' + specimen.split('-');
+            } else if (specimen !== '' && data.specimen !== '') {
+                url += '/' + data.specimen;
+            }
         }
 
         url += '#';
@@ -568,6 +568,25 @@ var gaia = {
         } catch (e) {
 
         }
+    },
+
+    convertDMS: function (lat, lng) {
+        var tdms = function (coordinate) {
+            var absolute = Math.abs(coordinate);
+            var degrees = Math.floor(absolute);
+            var minutesNotTruncated = (absolute - degrees) * 60;
+            var minutes = Math.floor(minutesNotTruncated);
+            var seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+
+            return degrees + "°" + minutes + '’' + seconds + '”';
+        };
+        var latitude = tdms(lat);
+        var latitudeCardinal = Math.sign(lat) >= 0 ? "N" : "S";
+
+        var longitude = tdms(lng);
+        var longitudeCardinal = Math.sign(lng) >= 0 ? "E" : "W";
+
+        return latitude + latitudeCardinal + ' ' + longitude + longitudeCardinal;
     }
 };
 
