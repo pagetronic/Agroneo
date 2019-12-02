@@ -1,11 +1,8 @@
 /*
  * Copyright 2019 Laurent PAGE, Apache Licence 2.0
  */
-package com.agroneo.web;
+package com.agroneo.web.gaia;
 
-import com.agroneo.web.gaia.ClassificationServlet;
-import com.agroneo.web.gaia.PlantaeServlet;
-import com.agroneo.web.gaia.SpecimensServlet;
 import com.agroneo.web.gaia.utils.ClassificationUtils;
 import com.agroneo.web.gaia.utils.GaiaGeoUtils;
 import com.mongodb.client.model.Filters;
@@ -18,6 +15,7 @@ import live.page.web.system.servlet.wrapper.ApiServletRequest;
 import live.page.web.system.servlet.wrapper.ApiServletResponse;
 import live.page.web.system.servlet.wrapper.WebServletRequest;
 import live.page.web.system.servlet.wrapper.WebServletResponse;
+import live.page.web.utils.Fx;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -79,14 +77,10 @@ public class GaiaServlet extends HttpServlet {
 	}
 
 	@Override
-	public void doGetApiPublic(ApiServletRequest req, ApiServletResponse resp) throws IOException, ServletException {
-		resp.sendResponse(ClassificationUtils.getCommons(req.getString("paging", null)));
-	}
-
-	@Override
 	public void doPostApiPublic(ApiServletRequest req, ApiServletResponse resp, Json data) throws IOException {
 		resp.setHeader("X-Robots-Tag", "index, noarchive, nosnippet");
 		Json rez = new Json("error", "NOT_FOUND");
+		Fx.log(data);
 		switch (data.getString("action")) {
 			case "specimens":
 				rez = GaiaGeoUtils.getSpecimens(
@@ -97,7 +91,9 @@ public class GaiaServlet extends HttpServlet {
 				break;
 			case "search":
 				rez = GaiaGeoUtils.search(
-						data.getString("search"), data.getString("family"), req.getQueryString() != null && req.getQueryString().equals("families"), data.getString("paging", null)
+						data.getString("search"),
+						data.getJson("filter") != null ? data.getJson("filter").getString("family") : null,
+						req.getQueryString() != null && req.getQueryString().equals("families"), data.getString("paging", null)
 				);
 
 				break;

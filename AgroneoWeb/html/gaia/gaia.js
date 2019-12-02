@@ -361,12 +361,21 @@ var gaia = {
 
 
         map.controls[google.maps.ControlPosition.LEFT_TOP].push($('<div class="map_search"/>').append(speciess).append(families)[0]);
+
         speciess.selectable({
             filter: function () {
-                return family !== '' ? {'family': family} : {};
+                var family = families.val();
+                return family && family !== '' ? {'family': family} : {};
             }
         });
-        families.selectable();
+        families.selectable({
+            selection: function (item) {
+
+                if (item.family !== families.val()) {
+                    speciess.trigger('clear')
+                }
+            }
+        });
 
         sync.attr('title', lang.get('LOADING')).html('$svg.mi_sync').css({display: 'none'});
         sync.timeout = 1;

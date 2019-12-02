@@ -36,7 +36,7 @@ public class GaiaGeoUtils implements ServletContextListener {
 	private static final int max_global = 500;
 	private static final int max_explore = 50;
 
-	public static Json search(String search, String family, boolean famillies, String paging_str) {
+	public static Json search(String search, String family, boolean families, String paging_str) {
 
 		List<Bson> pipeline = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class GaiaGeoUtils implements ServletContextListener {
 			filters.add(paging_filter);
 		}
 		if (family != null && !family.equals("")) {
-			filters.add(Filters.eq("family", Fx.ucfirst(family)));
+			filters.add(Filters.eq("family", family));
 		}
 
 		pipeline.add(Aggregates.match(Filters.and(filters)));
@@ -66,7 +66,7 @@ public class GaiaGeoUtils implements ServletContextListener {
 
 		pipeline.add(paginer.getLastSort());
 
-		return paginer.getResult(famillies ? "Families" : "Species", pipeline);
+		return paginer.getResult(families ? "Families" : "Species", pipeline);
 	}
 
 
