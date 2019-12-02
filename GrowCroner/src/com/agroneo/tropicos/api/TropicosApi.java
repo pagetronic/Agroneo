@@ -463,7 +463,7 @@ public class TropicosApi {
 
 			String rez = HttpClient.get(url.toString());
 			if (rez != null) {
-				pause = Math.max(pause_min, pause - pause_min);
+				pause = pause_min;
 				return new JsonParser().parse(rez);
 			}
 			error("Error get Api");
@@ -472,9 +472,7 @@ public class TropicosApi {
 
 	private static void error(String err) throws InterruptedException {
 		Fx.log(err);
-		if (pause < 60 * 60 * 1000) {
-			pause += pause;
-		}
+		pause = Math.max(pause, 30 * 60 * 1000);
 		Thread.sleep(pause);
 	}
 
