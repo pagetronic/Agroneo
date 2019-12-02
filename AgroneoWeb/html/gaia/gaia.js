@@ -17,19 +17,24 @@ var gaia = {
         var loading = sys.loading(40);
         inmap.html(loading);
         sys.comodo.hide();
-
-        $.getScript('https://maps.googleapis.com/maps/api/js?' +
-            'key=' +
-            'AIzaSy' +
-            'BI3aiKN' +
-            'Qg_HvHrF7' +
-            'tHK' +
-            'vEfeCPuFNR' +
-            'RsP8', function () {
+        var loadmap = function () {
+            gaia.ggLoaded = true;
             loading.remove();
             $('#middle').scrollTo(0);
             gaia.load(inmap);
-        });
+        };
+        if (gaia.ggLoaded) {
+            loadmap();
+        } else {
+            $.getScript('https://maps.googleapis.com/maps/api/js?' +
+                'key=' +
+                'AIzaSy' +
+                'BI3aiKN' +
+                'Qg_HvHrF7' +
+                'tHK' +
+                'vEfeCPuFNR' +
+                'RsP8', loadmap);
+        }
 
     },
     load: function (dest) {
