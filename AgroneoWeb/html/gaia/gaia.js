@@ -2,7 +2,8 @@ var gaia = {
     init: function () {
 
         var map = $('<div id="gaia"/>');
-        $('#middle').append(map);
+        $('#middle').html(map);
+        $('#lateral, #menu').remove();
         var inmap = $('<div class="inmap"/>');
         map.html(inmap);
         inmap.html(sys.loading(60, 'div').css({marginTop: 50}));
@@ -363,6 +364,9 @@ var gaia = {
         map.controls[google.maps.ControlPosition.LEFT_TOP].push($('<div class="map_search"/>').append(speciess).append(families)[0]);
 
         speciess.selectable({
+            selection: function (item) {
+                gaia.setUrl(null, null, null, '', null, item.id, item.family);
+            },
             filter: function () {
                 var family = families.val();
                 return family && family !== '' ? {'family': family} : {};
@@ -412,7 +416,6 @@ var gaia = {
             } else {
                 loadData({}, true);
                 if (species !== '') {
-
                     document.title = speciess.find('option[value=' + species + ']').text();
                 }
             }
@@ -429,7 +432,6 @@ var gaia = {
             } else {
                 document.title = families.find('option[value=' + family + ']').text();
             }
-
             speciess.trigger('clear');
         });
 
@@ -558,7 +560,7 @@ var gaia = {
         }
 
         if (species !== null && species !== undefined && species !== '') {
-            url += '/' + species.split('-');
+            url += '/' + species;
         } else if (species !== '' && data.species !== '') {
             url += '/' + data.species;
         }
