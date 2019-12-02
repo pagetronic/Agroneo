@@ -1,7 +1,7 @@
 var gaia = {
     init: function () {
 
-        var map = $('<div id="gaia"/>');
+        gaia.map = $('<div id="gaia"/>');
         $('#middle').append(map);
         var inmap = $('<div class="inmap"/>');
         map.html(inmap);
@@ -362,9 +362,7 @@ var gaia = {
 
         map.controls[google.maps.ControlPosition.LEFT_TOP].push($('<div class="map_search"/>').append(speciess).append(families)[0]);
         speciess.selectable({
-            filter: function () {
-                return family !== '' ? {'family': family} : {};
-            }
+            filter: [family]
         });
         families.selectable();
 
