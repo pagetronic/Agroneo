@@ -374,7 +374,6 @@ var gaia = {
         });
         families.selectable({
             selection: function (item) {
-
                 if (item.family !== families.val()) {
                     speciess.trigger('clear')
                 }
@@ -400,7 +399,8 @@ var gaia = {
 
         if (species !== '') {
             speciess.trigger('search', species);
-        } else if (family !== '') {
+        }
+        if (family !== '') {
             families.trigger('search', family);
         }
         speciess.on('change', function () {
