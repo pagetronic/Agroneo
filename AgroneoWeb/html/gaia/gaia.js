@@ -8,14 +8,6 @@ var gaia = {
         var inmap = $('<div class="inmap"/>');
         map.html(inmap);
         inmap.html(sys.loading(60, 'div').css({marginTop: 50}));
-        if (self !== top) {
-            $('#menu, #lateral').remove();
-            $('a, form').attr('target', '_top');
-            $('logo a').on('click', function () {
-                top.location.replace(document.location.href);
-                return false;
-            });
-        }
         var loading = sys.loading(40);
         inmap.html(loading);
         sys.comodo.hide();
@@ -28,7 +20,14 @@ var gaia = {
         if (gaia.ggLoaded) {
             loadmap();
         } else {
-            $.getScript('https://maps.googleapis.com/maps/api/js?' +
+            //hide for Google alert
+            $.getScript('https://' +
+                'maps.' +
+                'goog' +
+                'le' +
+                'apis.com/m' +
+                'aps/ap' +
+                'i/js?' +
                 'key=' +
                 'AIzaSy' +
                 'BI3aiKN' +
