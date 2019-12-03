@@ -16,15 +16,13 @@
 
         #end
         <em class="infos">#date($specimen.date) (#since($specimen.date,2))#if($specimen.update), #lang('UPDATED', "#since($specimen.update, 2 )")#end</em>
-        #if($specimen.text)
+        #if($specimen.text)gaia_photos
         <header>$specimen.text</header>
         #end
         <meta itemprop="hasMap" content="$http_site/gaia#$specimen.location.coordinates[1];$specimen.location.coordinates[0];16;$specimen.id;;"/>
         #if($specimen.images.size()>0)
-        #foreach($image in $specimen.images)#set($modulo=$velocityCount %5)
-        #if($modulo == 0)
         <div class="gaia_photos" style="flex-wrap:wrap">
-            #end
+        #foreach($image in $specimen.images)#set($modulo=$velocityCount %5)
             <div class="image" itemprop="photo" itemscope="" itemtype="https://schema.org/ImageObject">
                 <a href="$image.url" itemprop="image" class="popimage">
                     <img itemprop="thumbnail" src="$image.url@500x300.jpg"/>
@@ -35,10 +33,8 @@
                     #if($image.text)<span itemprop="caption">$image.text.replace('©','<br/>©')</span>#end
                 </a>
             </div>
-            #if($modulo == 4 || $velocityLast)
+        #end
         </div>
-        #end
-        #end
         #end
         <div class="both"></div>
 
