@@ -4,6 +4,7 @@ var gaia = {
         var map = $('<div id="gaia"/>');
         $('#middle').html(map);
         $('#lateral, #menu').remove();
+        sys.comodo.hide();
         var inmap = $('<div class="inmap"/>');
         map.html(inmap);
         inmap.html(sys.loading(60, 'div').css({marginTop: 50}));
