@@ -337,7 +337,7 @@ p.src a {
     border: 1px solid #FFF;
 }
 
-@media all and (max-width: 700px) {
+@media all and (max-width: 1000px) {
     .specimen .gaia_photos .image {
         flex: 1 1 33%;
     }
