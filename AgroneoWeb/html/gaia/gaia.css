@@ -335,6 +335,7 @@ p.src a {
     flex: 1 1 24%;
     max-width: 500px;
     border: 1px solid #FFF;
+    border-bottom: none;
 }
 
 @media all and (max-width: 1000px) {
