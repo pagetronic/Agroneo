@@ -80,7 +80,6 @@ public class GaiaServlet extends HttpServlet {
 	public void doPostApiPublic(ApiServletRequest req, ApiServletResponse resp, Json data) throws IOException {
 		resp.setHeader("X-Robots-Tag", "index, noarchive, nosnippet");
 		Json rez = new Json("error", "NOT_FOUND");
-		Fx.log(data);
 		switch (data.getString("action")) {
 			case "specimens":
 				rez = GaiaGeoUtils.getSpecimens(

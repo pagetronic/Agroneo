@@ -89,12 +89,12 @@
     height: 30px;
     width: 250px;
     margin-right: 10px;
+    z-index: 0;
 }
 
 .gaia .map_search .select:last-child {
     height: 30px;
     width: 200px;
-    z-index: 90;
 }
 
 .gaia .map_search {
@@ -106,7 +106,7 @@
     flex-wrap: wrap;
     padding-right: 70px;
     box-sizing: border-box;
-    z-index: 100;
+    z-index: 1 !important;
 }
 
 .gaia .map_search .select .quick {
@@ -324,6 +324,7 @@ noscript.nojs p.blink:before {
 p.src a {
     border: none;
 }
+
 .specimen .gaia_photos img {
     max-width: 100%;
     width: 100% !important;

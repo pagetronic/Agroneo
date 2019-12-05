@@ -16,6 +16,7 @@ var gaia = {
             loading.remove();
             $('#middle').scrollTo(0);
             gaia.load(inmap);
+            sys.comodo.hide();
         };
         if (gaia.ggLoaded) {
             loadmap();
@@ -40,10 +41,8 @@ var gaia = {
     },
     load: function (dest) {
 
-
         var level_zone = 6;
         window.debug = false;
-
 
         var conf = {
             zoom: 3,
@@ -61,10 +60,13 @@ var gaia = {
             }
         };
         var sync = $('<div class="sync"/>');
-        var speciess = $('<select url="/gaia"/>').attr('placeholder', lang.get('SEARCH_SPECIES'));
-        var families = $('<select url="/gaia?families"/>').attr('placeholder', lang.get('FAMILY'));
+
+        var speciesSelector = $('<select url="/gaia"/>').attr('placeholder', lang.get('SEARCH_SPECIES'));
+        var familiesSelector = $('<select url="/gaia?families"/>').attr('placeholder', lang.get('FAMILY'));
 
         var init_url = gaia.getUrl();
+        var species = init_url.species;
+        var family = init_url.family;
 
         var poped = null;
         if (!isNaN(init_url.lat)) {
@@ -82,8 +84,6 @@ var gaia = {
         if (init_url.mapType !== '') {
             conf.mapTypeId = init_url.mapType;
         }
-        var species = init_url.species;
-        var family = init_url.family;
 
 
         var map = new google.maps.Map(dest[0], conf);
@@ -126,7 +126,7 @@ var gaia = {
             var content = $('<div class="bubble"/>');
             var title = $('<h1/>');
             var species_title = $('<span/>').css({cursor: 'pointer'}).on('click', function () {
-                speciess.trigger('search', specimen.species.id);
+                speciesSelector.trigger('search', specimen.species.id);
                 info.close();
                 species = specimen.species.id;
                 gaia.setUrl(null, null, null, '', null, species);
@@ -135,7 +135,7 @@ var gaia = {
 
             }).text(specimen.species.name);
             var family_title = $('<span/>').css({cursor: 'pointer'}).on('click', function () {
-                families.trigger('search', specimen.species.family.toLocaleLowerCase());
+                familiesSelector.trigger('search', specimen.species.family.toLocaleLowerCase());
                 info.close();
                 family = specimen.species.family.toLocaleLowerCase();
                 gaia.setUrl(null, null, null, '', null, null, family);
@@ -358,113 +358,6 @@ var gaia = {
         };
 
         /* UI */
-        gaia.ui(map, sync);
-
-
-        map.controls[google.maps.ControlPosition.LEFT_TOP].push($('<div class="map_search"/>').append(speciess).append(families)[0]);
-
-        speciess.selectable({
-            selection: function (item) {
-                gaia.setUrl(null, null, null, '', null, item.id, item.family);
-            },
-            filter: function () {
-                var family = families.val();
-                return family && family !== '' ? {'family': family} : {};
-            }
-        });
-        families.selectable({
-            selection: function (item) {
-                if (item.family !== families.val()) {
-                    speciess.trigger('clear')
-                }
-            }
-        });
-
-        sync.attr('title', lang.get('LOADING')).html('$svg.mi_sync').css({display: 'none'});
-        sync.timeout = 1;
-        sync.loading = function (start) {
-            if (start) {
-                sync.stop(true, true).fadeIn(100);
-                clearTimeout(sync.timeout);
-                sync.timeout = setTimeout(function () {
-                    sync.loading(false);
-                }, 10000);
-            } else {
-                sync.stop(true, true).fadeOut(400, function () {
-                    $(this).css({display: 'none'})
-                });
-            }
-        };
-        map.controls[google.maps.ControlPosition.LEFT_TOP].push(sync[0]);
-
-        if (species !== '') {
-            speciess.trigger('search', species);
-        }
-        if (family !== '') {
-            families.trigger('search', family);
-        }
-        speciess.on('change', function () {
-            info.close();
-            gaia.setUrl(null, null, null, '', null, this.value);
-            species = speciess.val();
-            if (species === null) {
-                species = '';
-            }
-            if (species === '' && family === '') {
-                loadData();
-                document.title = lang.get('PLANTS_MAP');
-            } else {
-                loadData({}, true);
-                if (species !== '') {
-                    document.title = speciess.find('option[value=' + species + ']').text();
-                }
-            }
-        });
-        families.on('change', function () {
-            info.close();
-            gaia.setUrl(null, null, null, '', null, null, this.value);
-            family = families.val();
-            if (family === null) {
-                family = '';
-            }
-            if (family === '') {
-                document.title = lang.get('PLANTS_MAP');
-            } else {
-                document.title = families.find('option[value=' + family + ']').text();
-            }
-            speciess.trigger('clear');
-        });
-
-
-        loadData();
-
-
-        mapserv.addListener('spiderfy', function () {
-            info.close();
-        });
-
-        mapserv.addListener('click', function (marker, e) {
-            $('input').blur();
-            loadMarker(marker);
-            if (marker.specimen !== undefined) {
-                gaia.setUrl(null, null, null, marker.specimen.id);
-            }
-        });
-
-        var tempo = -1;
-        google.maps.event.addListener(map, 'bounds_changed', function () {
-
-            var center = map.getCenter();
-            gaia.setUrl(center.lat(), center.lng(), map.getZoom());
-            clearTimeout(tempo);
-            tempo = setTimeout(loadData, 700);
-
-        });
-
-
-    },
-    ui: function (map, sync) {
-        window.map = map;
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push($('<a class="cmdmap"/>').html('$svg.fa_icon_close').on('click', function () {
             ajax.reload(false);
         })[0]);
@@ -497,14 +390,12 @@ var gaia = {
             popin.header(lang.get('SHARE'));
 
         })[0]);
-        map.controls[google.maps.ControlPosition.RIGHT_TOP].push($('<div class="groupmap social"/>').append($('<a class="facebook"/>').attr('title', lang.get('SHARE')).html('$svg.fa_icon_facebook_official').on('click', function () {
-            window.open('https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.location.href), '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=400,resizable=yes').focus();
-        })).append($('<a class="twitter"/>').attr('title', lang.get('SHARE')).html('$svg.fa_icon_twitter').on('click', function () {
-            window.open('https://twitter.com/intent/tweet/?url=' + encodeURIComponent(document.location.href) + '&text=' + encodeURIComponent(document.title), '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=400,resizable=yes').focus();
-        })).append($('<a class="paypal"/>').attr('title', 'PayPal').html('$svg.fa_icon_paypal').on('click', function () {
-            window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8TULTLMAYUVL8', '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=700,resizable=yes').focus();
-            return false;
-        }))[0]);
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
+            $('<div class="groupmap social"/>').append($('<a class="paypal"/>').attr('title', 'PayPal').html('$svg.fa_icon_paypal').on('click', function () {
+                window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8TULTLMAYUVL8', '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=700,resizable=yes').focus();
+                return false;
+            }))[0]
+        );
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($('<div class="groupmap zoom"/>').append($('<a/>').html('$svg.fa_icon_plus').on('click', function () {
             map.setZoom(map.getZoom() + 1);
         })).append($('<a/>').html('$svg.fa_icon_minus').on('click', function () {
@@ -522,6 +413,107 @@ var gaia = {
             dest.pulse(50);
 
         })[0]);
+
+
+        map.controls[google.maps.ControlPosition.LEFT_TOP].push(
+            $('<div class="map_search"/>').append(speciesSelector).append(familiesSelector)[0]
+        );
+
+        speciesSelector.selectable({
+            selection: function (item) {
+                gaia.setUrl(null, null, null, '', null, item.id, item.family);
+            },
+            filter: function () {
+                var family = familiesSelector.val();
+                return family && family !== '' ? {'family': family} : {};
+            }
+        });
+        familiesSelector.selectable({
+            selection: function (item) {
+                if (item.family !== familiesSelector.val()) {
+                    speciesSelector.trigger('clear');
+                }
+            }
+        });
+
+        sync.attr('title', lang.get('LOADING')).html('$svg.mi_sync').css({display: 'none'});
+        sync.timeout = 1;
+        sync.loading = function (start) {
+            if (start) {
+                sync.stop(true, true).fadeIn(100);
+                clearTimeout(sync.timeout);
+                sync.timeout = setTimeout(function () {
+                    sync.loading(false);
+                }, 10000);
+            } else {
+                sync.stop(true, true).fadeOut(400, function () {
+                    $(this).css({display: 'none'})
+                });
+            }
+        };
+        map.controls[google.maps.ControlPosition.LEFT_TOP].push(sync[0]);
+
+        if (species !== '') {
+            speciesSelector.trigger('search', species);
+        }
+        if (family !== '') {
+            familiesSelector.trigger('search', family);
+        }
+        speciesSelector.on('change', function () {
+            info.close();
+            species = speciesSelector.val();
+            if (species === null) {
+                species = '';
+            }
+            if (species === '' && family === '') {
+                loadData();
+                document.title = lang.get('PLANTS_MAP');
+            } else {
+                loadData({}, true);
+                if (species !== '') {
+                    document.title = speciesSelector.find('option[value=' + species + ']').text();
+                }
+            }
+            gaia.setUrl(null, null, null, '', null, this.value);
+        });
+        familiesSelector.on('change', function () {
+            info.close();
+            family = familiesSelector.val();
+            if (family === null) {
+                family = '';
+            }
+            if (family === '') {
+                document.title = lang.get('PLANTS_MAP');
+            } else {
+                document.title = familiesSelector.find('option[value=' + family + ']').text();
+            }
+            speciesSelector.trigger('clear');
+            gaia.setUrl(null, null, null, '', null, null, this.value);
+        });
+
+        loadData();
+
+
+        mapserv.addListener('spiderfy', function () {
+            info.close();
+        });
+
+        mapserv.addListener('click', function (marker, e) {
+            $('input').blur();
+            loadMarker(marker);
+            if (marker.specimen !== undefined) {
+                gaia.setUrl(null, null, null, marker.specimen.id);
+            }
+        });
+
+        var tempo = -1;
+        google.maps.event.addListener(map, 'bounds_changed', function () {
+            var center = map.getCenter();
+            gaia.setUrl(center.lat(), center.lng(), map.getZoom());
+            clearTimeout(tempo);
+            tempo = setTimeout(loadData, 700);
+        });
+
 
     },
     getUrl: function () {
@@ -566,7 +558,7 @@ var gaia = {
         }
         if (url.split('/').length === 4) {
             if (specimen !== null && specimen !== undefined && specimen !== '') {
-                url += '/' + specimen.split('-');
+                url += '/' + specimen;
             } else if (specimen !== '' && data.specimen !== '') {
                 url += '/' + data.specimen;
             }
