@@ -86,7 +86,7 @@ public class TropicosApi {
 
 		Fx.log("Tropicos Api updateName");
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MONTH, -6);
+		cal.add(Calendar.MONTH, -3);
 		List<Json> species = Db.find("Species",
 				Filters.and(
 						Filters.ne("sym", "*"), Filters.ne("sym", "**"), Filters.ne("sym", "***"),
