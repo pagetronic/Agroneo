@@ -16,7 +16,7 @@
 
         #end
         <em class="infos">#date($specimen.date) (#since($specimen.date,2))#if($specimen.update), #lang('UPDATED', "#since($specimen.update, 2 )")#end</em>
-        #if($specimen.text)gaia_photos
+        #if($specimen.text)
         <header>$specimen.text</header>
         #end
         <meta itemprop="hasMap" content="$http_site/gaia#$specimen.location.coordinates[1];$specimen.location.coordinates[0];16;$specimen.id;;"/>
