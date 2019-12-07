@@ -69,7 +69,9 @@ public class TropicosApi {
 		if (listNameid != null && !listNameid.get(0).getAsJsonObject().keySet().contains("Error")) {
 			for (JsonElement nameIdObj : listNameid) {
 				int nameid = nameIdObj.getAsJsonObject().get("NameId").getAsInt();
-				getNameid(nameid, null);
+				if (!getNameid(nameid, null)) {
+					break;
+				}
 			}
 			lastNames();
 		}
@@ -95,19 +97,21 @@ public class TropicosApi {
 
 		Fx.log("Species to update: " + species.size());
 		for (Json specie : species) {
-			getNameid(specie.getInteger("tId"), specie.getId());
+			if (!getNameid(specie.getInteger("tId"), specie.getId())) {
+				break;
+			}
 			if (control.isTerminated() || control.isShutdown()) {
 				throw new InterruptedException("");
 			}
 		}
 		if (species.size() == 0) {
-			Thread.sleep(120 * 60 * 1000);
+			Thread.sleep(60 * 60 * 1000);
 		}
 
 
 	}
 
-	private static void getNameid(int nameid, String species_id) throws InterruptedException {
+	private static boolean getNameid(int nameid, String species_id) throws InterruptedException {
 
 		if (control.isTerminated() || control.isShutdown()) {
 			throw new InterruptedException("");
@@ -120,7 +124,7 @@ public class TropicosApi {
 		}
 
 		if (species == null) {
-			return;
+			return false;
 		}
 		//!! = nom. cons., ! = Legitimate, ** = Invalid, *** = nom. rej., * = Illegitimate
 		if (species_id == null) {
@@ -136,7 +140,7 @@ public class TropicosApi {
 
 			List<Json> tmp_images = getImages(nameid);
 			if (tmp_images == null) {
-				return;
+				return false;
 			}
 
 			List<Json> images = new ArrayList<>();
@@ -149,7 +153,7 @@ public class TropicosApi {
 			if (images.size() > 0) {
 				List<Json> tmp_specimens = getSpecimens(nameid, species, species_id, images);
 				if (tmp_specimens == null) {
-					return;
+					return false;
 				}
 				for (Json specimen : tmp_specimens) {
 					if (!Db.exists("Specimens", Filters.eq("tId", specimen.getInteger("tId")))) {
@@ -205,6 +209,7 @@ public class TropicosApi {
 		}
 		System.out.print(".");
 
+		return true;
 
 	}
 
