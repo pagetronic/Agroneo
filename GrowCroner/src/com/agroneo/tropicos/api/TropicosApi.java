@@ -69,9 +69,7 @@ public class TropicosApi {
 		if (listNameid != null && !listNameid.get(0).getAsJsonObject().keySet().contains("Error")) {
 			for (JsonElement nameIdObj : listNameid) {
 				int nameid = nameIdObj.getAsJsonObject().get("NameId").getAsInt();
-				if (!getNameid(nameid, null)) {
-					break;
-				}
+				getNameid(nameid, null);
 			}
 			lastNames();
 		}
@@ -97,9 +95,7 @@ public class TropicosApi {
 
 		Fx.log("Species to update: " + species.size());
 		for (Json specie : species) {
-			if (!getNameid(specie.getInteger("tId"), specie.getId())) {
-				break;
-			}
+			getNameid(specie.getInteger("tId"), specie.getId());
 			if (control.isTerminated() || control.isShutdown()) {
 				throw new InterruptedException("");
 			}
@@ -111,7 +107,7 @@ public class TropicosApi {
 
 	}
 
-	private static boolean getNameid(int nameid, String species_id) throws InterruptedException {
+	private static void getNameid(int nameid, String species_id) throws InterruptedException {
 
 		if (control.isTerminated() || control.isShutdown()) {
 			throw new InterruptedException("");
@@ -124,7 +120,7 @@ public class TropicosApi {
 		}
 
 		if (species == null) {
-			return false;
+			return;
 		}
 		//!! = nom. cons., ! = Legitimate, ** = Invalid, *** = nom. rej., * = Illegitimate
 		if (species_id == null) {
@@ -140,7 +136,7 @@ public class TropicosApi {
 
 			List<Json> tmp_images = getImages(nameid);
 			if (tmp_images == null) {
-				return false;
+				return;
 			}
 
 			List<Json> images = new ArrayList<>();
@@ -153,7 +149,7 @@ public class TropicosApi {
 			if (images.size() > 0) {
 				List<Json> tmp_specimens = getSpecimens(nameid, species, species_id, images);
 				if (tmp_specimens == null) {
-					return false;
+					return;
 				}
 				for (Json specimen : tmp_specimens) {
 					if (!Db.exists("Specimens", Filters.eq("tId", specimen.getInteger("tId")))) {
@@ -209,7 +205,6 @@ public class TropicosApi {
 		}
 		System.out.print(".");
 
-		return true;
 
 	}
 
