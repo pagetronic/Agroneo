@@ -58,7 +58,7 @@ public class GaiaServlet extends HttpServlet {
 			return;
 		}
 
-		Matcher species_matcher = Pattern.compile("^/(plantae|gaia|species|especes)(/[a-z\\-]+)?(/[a-z\\-]+)$", Pattern.CASE_INSENSITIVE).matcher(req.getRequestURI());
+		Matcher species_matcher = Pattern.compile("^/(plantae|gaia|species|especes)(/[a-z0-9\\-]+)?(/[a-z0-9\\-]+)$", Pattern.CASE_INSENSITIVE).matcher(req.getRequestURI());
 		if (species_matcher.find()) {
 			ClassificationServlet.doGetSpecy(species_matcher.group(3).substring(1), req, resp);
 			return;
