@@ -95,7 +95,7 @@ public class TropicosApi {
 				)
 		).hint(new Json("sym", 1).put("rank", 1).put("update", 1).put("specimens", -1)).sort(Sorts.orderBy(Sorts.ascending("update"), Sorts.descending("specimens"))).limit(300).into(new ArrayList<>());
 
-
+		Fx.log("Species to update: " + species.size());
 		for (Json specie : species) {
 			if (!getNameid(specie.getInteger("tId"), specie.getId())) {
 				break;
@@ -103,6 +103,9 @@ public class TropicosApi {
 			if (control.isTerminated() || control.isShutdown()) {
 				throw new InterruptedException("");
 			}
+		}
+		if (species.size() == 0) {
+			Thread.sleep(120 * 60 * 1000);
 		}
 
 
@@ -241,7 +244,7 @@ public class TropicosApi {
 		}
 
 		if (speciestp.get("SynonymCount") != null) {
-			int synonym = Integer.valueOf(speciestp.get("SynonymCount").getAsString());
+			int synonym = Integer.parseInt(speciestp.get("SynonymCount").getAsString());
 			if (synonym > 0) {
 				List<String> synonyms = getSynonym(nameId);
 				if (synonyms == null) {
@@ -253,7 +256,7 @@ public class TropicosApi {
 		}
 
 		if (speciestp.get("AcceptedNameCount") != null) {
-			int accepted = Integer.valueOf(speciestp.get("AcceptedNameCount").getAsString());
+			int accepted = Integer.parseInt(speciestp.get("AcceptedNameCount").getAsString());
 			if (accepted > 0) {
 				List<String> accepteds = getAccepted(nameId);
 				if (accepteds == null) {
