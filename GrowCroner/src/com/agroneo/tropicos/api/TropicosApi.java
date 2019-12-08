@@ -306,7 +306,7 @@ public class TropicosApi {
 					Json image = new Json();
 					image.put("tId", imagetp.get("ImageId").getAsInt());
 					image.put("stId", imagetp.get("SpecimenId").getAsInt());
-					image.put("copyright", imagetp.get("Copyright").getAsString() + " / TropicosIA");
+					image.put("copyright", imagetp.get("Copyright").getAsString() + " / Tropicos");
 					image.put("url", imagetp.get("DetailJpgUrl").getAsString());
 					image.put("caption", imagetp.get("Caption").getAsString());
 					image.put("kind", imagetp.get("ImageKindText").getAsString());
@@ -361,7 +361,7 @@ public class TropicosApi {
 									.put("mobot", image.getInteger("tId"))
 							, 2048);
 					if (imageid == null) {
-						error("Error download TropicosIA Image " + image.getString("url") + " for " + nameId);
+						error("Error download Tropicos Image " + image.getString("url") + " for " + nameId);
 						return null;
 					}
 					specimen.add("images", imageid);
