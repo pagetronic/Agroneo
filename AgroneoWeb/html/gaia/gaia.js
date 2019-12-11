@@ -208,11 +208,12 @@ var gaia = {
             }
             data.action = 'specimens';
 
-            if (species !== '' && species !== undefined && species !== null) {
-                data.species = species;
+            if (speciesSelector.val() !== null) {
+                data.species = speciesSelector.val();
             }
-            if (family !== '' && family !== undefined && family !== null) {
-                data.family = family;
+
+            if (familiesSelector.val() !== null) {
+                data.family = familiesSelector.val();
             }
 
             xhrapi = api.post('/gaia', data, function (rez) {
