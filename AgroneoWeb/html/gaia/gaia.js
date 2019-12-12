@@ -510,7 +510,8 @@ var gaia = {
         var tempo = -1;
         google.maps.event.addListener(map, 'bounds_changed', function () {
             var center = map.getCenter();
-            gaia.setUrl(center.lat(), center.lng() % 180, map.getZoom());
+            var wrapped = new google.maps.LatLng(center.lat(), center.lng());
+            gaia.setUrl(wrapped.lat(), wrapped.lng(), map.getZoom());
             clearTimeout(tempo);
             tempo = setTimeout(loadData, 700);
         });
