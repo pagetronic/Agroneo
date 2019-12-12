@@ -5,12 +5,12 @@
 	<div class="cooltxt">
 		<h1>$title</h1>
 		#if($description)<p>$description</p>#end
-	</div>
-		#parse("/gaia/creation.html")
-	<div class="cooltxt">
 		#if($commons && $commons.size()>0)
 			<p>#if($commons.size()>1)#lang("COMMONS_NAMES")#else#lang("COMMON_NAME")#end: #foreach($common in $commons)#modulo<a href="$common.url">$common.name</a>#end.</p>
 		#end
+	</div>
+	#parse("/gaia/creation.html")
+	<div class="cooltxt">
 
 		#set($base=$base_canonical.split('\?').get(0))
 		#set($mediator="
