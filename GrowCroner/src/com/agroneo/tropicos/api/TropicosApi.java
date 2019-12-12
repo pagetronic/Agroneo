@@ -204,7 +204,7 @@ public class TropicosApi {
 					specimen.getString("family"),
 					specimen.getString("title"),
 					specimen.getText("text"),
-					"/gaia/" + specimen.getId())
+					"/gaia/" + specimen.getString("family").toLowerCase() + "/" + specimen.getString("species").toLowerCase() + "/" + specimen.getId())
 			);
 
 		}
