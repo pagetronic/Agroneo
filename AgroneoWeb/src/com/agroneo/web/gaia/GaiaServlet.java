@@ -61,11 +61,6 @@ public class GaiaServlet extends HttpServlet {
 			return;
 		}
 		if (req.getId() != null) {
-			if (isOldAuthors(req)) {
-				resp.sendRedirect("/users/" + req.getId(), 301);
-				return;
-			}
-
 			SpecimensServlet.doGetSpecimen(req.getId(), req, resp, req.getUser(), req.contains("remove"));
 			return;
 		}
@@ -75,7 +70,7 @@ public class GaiaServlet extends HttpServlet {
 
 	@Override
 	public void doPostApiPublic(ApiServletRequest req, ApiServletResponse resp, Json data) throws IOException {
-		resp.setHeader("X-Robots-Tag", "index, noarchive, nosnippet");
+
 		Json rez = new Json("error", "NOT_FOUND");
 		switch (data.getString("action")) {
 			case "specimens":
@@ -98,7 +93,4 @@ public class GaiaServlet extends HttpServlet {
 		resp.sendResponse(rez);
 	}
 
-	public boolean isOldAuthors(WebServletRequest req) {
-		return req.getRequestURI().contains("/gaia/authors/") && Db.exists("Users", Filters.eq("_id", req.getId()));
-	}
 }
