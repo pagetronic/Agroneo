@@ -200,11 +200,11 @@ public class TropicosApi {
 
 			//TODO do that !
 			specimens.forEach((specimen) -> notify(
-					specimen.getString("species"),
-					specimen.getString("family"),
 					specimen.getString("title"),
 					specimen.getText("text"),
-					"/gaia/" + specimen.getString("family").toLowerCase() + "/" + specimen.getString("species").toLowerCase() + "/" + specimen.getId())
+					specimen.getString("family"),
+					specimen.getString("species"),
+					specimen.getId())
 			);
 
 		}
@@ -480,9 +480,10 @@ public class TropicosApi {
 		Thread.sleep(pause);
 	}
 
-	private static void notify(String species, String family, String title, String text, String url) {
+	private static void notify(String title, String text, String family, String species, String specimen) {
 
-		Notifier.notify(Arrays.asList("Specimens(ALL)", "Species(" + species + ")", "Families(" + family + ")"), null, title, text, url, null, 1, TimeUnit.HOURS);
+		Notifier.notify(Arrays.asList("Specimens(ALL)", "Species(" + species + ")", "Families(" + family + ")"), null, title, text,
+				"/gaia/" + family + "/" + species + "/" + specimen, null, 1, TimeUnit.HOURS);
 
 	}
 }
