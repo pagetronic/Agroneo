@@ -41,7 +41,7 @@
     <div class="cooltxt gaia">
 
         #if($specimens.result)
-        #set($mediator="<button onclick='gaia.init()' class='gaiabtn'><txt>#lang('GAIA_VIEW_MAP')</txt></button>")
+        #set($mediator="<button onclick='map.init()' class='gaiabtn'><txt>#lang('GAIA_VIEW_MAP')</txt></button>")
         <div class="pagination">#pagination($specimens.paging)</div>
         #set($mediator="")
         #foreach($specimen in $specimens.result)

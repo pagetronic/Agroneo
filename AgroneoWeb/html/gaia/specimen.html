@@ -70,7 +70,7 @@
             <meta itemprop="latitude" content="$specimen.location.coordinates[1]"/>
             <meta itemprop="longitude" content="$specimen.location.coordinates[0]"/>
             <strong>#lang('LOCALISATION','ucfirst'):</strong>
-            <a title="#lang('GAIA_VIEW_MAP')" class="mp" href="#$specimen.location.coordinates[1];$specimen.location.coordinates[0];7;$specimen.id;;" onclick="gaia.init()"><img src="$http_cdn/ui/maps@23x23" width="23" height="23"/></a>
+            <a title="#lang('GAIA_VIEW_MAP')" class="mp" href="#$specimen.location.coordinates[1];$specimen.location.coordinates[0];7;$specimen.id;;" onclick="map.init()"><img src="$http_cdn/ui/maps@23x23" width="23" height="23"/></a>
             $Fxm.convertDMS($specimen.location)
         </p>
         #end
@@ -130,7 +130,7 @@
         });
         if (self !== top) {
             sys.push(function () {
-                gaia.init();
+                map.init();
             });
         }
     </script>

@@ -47,6 +47,12 @@ public class ClassificationServlet {
 			resp.sendRedirect(canonical, 301);
 			return;
 		}
+
+		req.setAttribute("species", species.getId());
+		req.setAttribute("genus", genus.getId());
+		req.setAttribute("family", family.getId());
+
+
 		req.setRobotsIndex(req.getQueryString() == null, true);
 
 		req.setCanonical(canonical, "sort", "paging");
@@ -99,6 +105,9 @@ public class ClassificationServlet {
 			return;
 		}
 
+		req.setAttribute("genus", genus.getId());
+		req.setAttribute("family", genus.getJson("family").getId());
+
 		req.setAttribute("subtitle", genus.getString("name"));
 
 		req.setRobotsIndex(!isSpecimens || req.getQueryString() == null, true);
@@ -146,6 +155,8 @@ public class ClassificationServlet {
 			resp.sendError(404);
 			return;
 		}
+
+
 		String canonical = family.getString("url");
 
 
@@ -157,6 +168,8 @@ public class ClassificationServlet {
 			resp.sendRedirect(canonical, 301);
 			return;
 		}
+
+		req.setAttribute("family", family.getId());
 
 		req.setCanonical(canonical, "sort", "paging");
 		req.setHrefLangs(req.getLng());
