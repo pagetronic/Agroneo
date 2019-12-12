@@ -225,6 +225,8 @@ public class ClassificationServlet {
 				return;
 			}
 
+			req.setAttribute("common_name", common.getString("name"));
+
 			canonical = canonical + "/" + id;
 			req.setTitle(Language.get("COMMON_NAME", req.getLng()) + " " + common.getString("name"));
 			req.addBreadCrumb(Language.get("COMMONS_NAMES", req.getLng()), "/gaia/commons");

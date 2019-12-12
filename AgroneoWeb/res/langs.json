@@ -396,6 +396,14 @@
     "pt": "Cartografia",
     "de": "Kartographie"
   },
+  "POST_SPECIMEN": {
+    "fr": "Poster un spécimen de plante",
+    "en": "Post a plant specimen",
+    "it": "Pubblica un esemplare di pianta",
+    "es": "Publicar una muestra de planta",
+    "pt": "Colocar uma amostra de planta",
+    "de": "Veröffentlichen Sie eine Pflanzenprobe"
+  },
   "SAGITTARIUS": {
     "fr": "Sagittaire ♐",
     "en": "Sagittarius ♐",

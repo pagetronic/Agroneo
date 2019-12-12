@@ -1,8 +1,10 @@
 <div id="creation" class="creation_form">
-
+    <div class="flexible">
+        <input type="text" placeholder="#lang('POST_SPECIMEN')"/>
+    </div>
 </div>
 <script type="text/javascript">
     sys.push(function () {
-        gaia.form($('#creation'), '$!species');
+        gaia.form($('#creation'), '$!species', '$!common_name');
     });
 </script>
