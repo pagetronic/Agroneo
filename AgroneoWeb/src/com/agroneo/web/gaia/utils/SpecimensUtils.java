@@ -16,7 +16,10 @@ import java.util.List;
 
 public class SpecimensUtils {
 
-	//TODO Tall/large and type
+	//TODO Tall/large/type
+	//TODO multiple authors
+	//TODO specify date
+	//TODO specify copyright
 
 	public static Json create(Json data, Users user) {
 		Date date = new Date();
