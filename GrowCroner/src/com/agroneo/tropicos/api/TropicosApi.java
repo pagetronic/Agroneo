@@ -198,7 +198,6 @@ public class TropicosApi {
 			System.out.println();
 			Fx.log("Tropicos : " + nameid + " / " + specimens.size() + " specimens");
 
-			//TODO do that !
 			specimens.forEach((specimen) -> notify(
 					specimen.getString("title"),
 					specimen.getText("text"),
