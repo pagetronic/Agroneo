@@ -510,7 +510,7 @@ var gaia = {
         var tempo = -1;
         google.maps.event.addListener(map, 'bounds_changed', function () {
             var center = map.getCenter();
-            gaia.setUrl(center.lat(), center.lng(), map.getZoom());
+            gaia.setUrl(center.lat(), center.lng() % 180, map.getZoom());
             clearTimeout(tempo);
             tempo = setTimeout(loadData, 700);
         });
@@ -543,6 +543,7 @@ var gaia = {
         }
     },
     setUrl: function (lat, lng, zoom, marker, mapType, species, family, specimen) {
+
         var data = gaia.getUrl();
         var url = '/gaia';
 
