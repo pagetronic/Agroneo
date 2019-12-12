@@ -598,6 +598,9 @@ var map = {
         var longitudeCardinal = Math.sign(lng) >= 0 ? "E" : "W";
 
         return latitude + latitudeCardinal + ' ' + longitude + longitudeCardinal;
+    },
+    getLocation(coordinates, result) {
+        //todo load map
     }
 };
 

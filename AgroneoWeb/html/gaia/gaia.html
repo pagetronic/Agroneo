@@ -4,7 +4,9 @@
     <div class="cooltxt">
         <h1>$title</h1>
         #if($description)<p>$description</p>#end
-        #parse("/gaia/creation.html")
+    </div>
+    #parse("/gaia/creation.html")
+    <div class="cooltxt">
         #set($mediator="
         <button onclick='map.init()' class='gaiabtn'><txt>#lang('GAIA_VIEW_MAP')</txt></button>
         #if($url_specimens)<a href='$url_specimens'>$svg.fa_icon_leaf<txt>&nbsp;#lang('GAIA_LAST_SPECIMENS','lowercase')#if($subtitle) ($subtitle)#end</txt></a>#end

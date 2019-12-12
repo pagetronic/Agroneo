@@ -38,12 +38,14 @@
     "es": "Clasificación"
   },
   "COMMONS_NAMES": {
+    "js": true,
     "fr": "Noms communs",
     "en": "Common names",
     "pt": "Nomes comuns",
     "es": "Nombres comunes"
   },
   "COMMON_NAME": {
+    "js": true,
     "fr": "Nom commun",
     "en": "Common name",
     "pt": "Nome comum",
@@ -97,10 +99,6 @@
     "es": "Especímenes de plantas referenciados por %1.",
     "pt": "Espécimes de plantas referenciados por %1.",
     "de": "Pflanzenproben von %1 referenziert."
-  },
-  "SCOPE_GAIA_EXPLAIN": {
-    "fr": "accès à la création de spécimens",
-    "en": "access to specimens creation"
   },
   "GAIA_AUTHORS_TITLE": {
     "fr": "Plantes de %1",
@@ -308,6 +306,15 @@
     "pt": "Código de ligação",
     "de": "Code verknüpfen"
   },
+  "LOCATION": {
+    "js": true,
+    "fr": "localisation",
+    "en": "location",
+    "it": "Posizione",
+    "es": "ubicación",
+    "pt": "localização",
+    "de": "Standort"
+  },
   "MOON": {
     "fr": "Lune",
     "en": "Moon",
@@ -397,6 +404,10 @@
     "de": "Schütze ♐",
     "pt": "Sagitário ♐"
   },
+  "SCOPE_GAIA_EXPLAIN": {
+    "fr": "accès à la création de spécimens",
+    "en": "access to specimens creation"
+  },
   "SCORPIO": {
     "fr": "Scorpion ♏",
     "en": "Scorpius ♏",
@@ -456,6 +467,7 @@
     "pt": "Sudoeste"
   },
   "SPECIES": {
+    "js": true,
     "fr": "espèce",
     "en": "species",
     "it": "specie",
