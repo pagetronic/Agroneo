@@ -113,8 +113,11 @@ public class GaiaServlet extends HttpServlet {
 	public void doPostApiAuth(ApiServletRequest req, ApiServletResponse resp, Json data, Users user) throws IOException, ServletException {
 		Json rez = new Json();
 		switch (data.getString("action")) {
-			case "specimen":
+			case "create":
 				rez = SpecimensUtils.create(data, user);
+				break;
+			case "edit":
+				rez = SpecimensUtils.edit(data, user);
 				break;
 		}
 		if (!rez.isEmpty()) {
