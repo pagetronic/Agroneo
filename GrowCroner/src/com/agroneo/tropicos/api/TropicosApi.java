@@ -89,7 +89,7 @@ public class TropicosApi {
 		cal.add(Calendar.MONTH, -3);
 		List<Json> species = Db.find("Species",
 				Filters.and(
-						Filters.ne("sym", "*"), Filters.ne("sym", "**"), Filters.ne("sym", "***"),
+						//Filters.ne("sym", "*"), Filters.ne("sym", "**"), Filters.ne("sym", "***"),
 						Filters.eq("rank", "species"),
 						Filters.or(Filters.eq("update", null), Filters.lt("update", cal.getTime()))
 				)
