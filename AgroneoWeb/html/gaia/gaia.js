@@ -29,18 +29,28 @@ var gaia = {
 
         var coordinates = null;
         var location = $('<button class="flexable gaiabtn" />').text(lang.get('LOCATION'));
+        var lat = $('<input type="number" class="flexable" size="5" />').attr('placeholder', lang.get('LATITUDE'));
+        var lon = $('<input type="number" class="flexable" size="5" />').attr('placeholder', lang.get('LONGITUDE'));
         var picker = $('<div class="picker" />').hide();
         location.on('click', function () {
             picker.css({height: 300, width: '100%'});
             map.getLocation(picker.show(), function (geoJson) {
                 coordinates = geoJson;
+                lat.val(geoJson.coordinates[1]);
+                lon.val(geoJson.coordinates[0]);
             });
         });
 
-        var blobs = $('<button class="flexable"  />').html('$svg.fa_icon_image ' + lang.get('UPLOAD_IMAGE')).addClass('flexable');
 
-        where.append($('<div class="flexo" />').append(location).append(blobs));
+        where.append($('<div class="flexo flexible" />').css({
+            marginBottom: 8
+        }).append(location).append(lat).append(lon));
         where.append(picker);
+
+        var blobs = $('<button class="flexable"  />').html('$svg.fa_icon_image ' + lang.get('UPLOAD_IMAGE')).addClass('flexable');
+        where.append($('<div class="flexo flexible" />').css({
+            marginBottom: 8
+        }).append(blobs));
 
         var imgs = $('<div class="imgs" />');
         where.append(imgs);
