@@ -51,12 +51,14 @@
     margin-top: 0px;
     padding-top: 0px;
 }
+
 .gaia .picker {
     border: 1px solid #D7D7D7;
     background: #FAFAFA;
     border-radius: 5px;
     margin: 5px 0px;
 }
+
 .gaia .bubble .desc {
     max-height: 100px;
     overflow-y: auto;
@@ -367,6 +369,10 @@ p.src a {
     clear: both;
     overflow: hidden;
     max-height: 29px;
+}
+
+.creation_form h3 {
+    margin: 0px 0px 10px 0px;
 }
 
 .creation_form .imgs .add {

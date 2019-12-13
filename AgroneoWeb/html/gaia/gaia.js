@@ -7,7 +7,9 @@ var gaia = {
     makeform: function (where, species_id, common_name, specimen) {
         var height = 29;
         where.css({height: height, maxHeight: 'initial'});
-        var title = where.find('input').attr('placeholder', lang.get('TITLE')).focus();
+        var title = where.find('input');
+        var h3 = $('<h3 />').text(title.attr('placeholder'));
+        title.attr('placeholder', lang.get('TITLE')).focus();
         var species = $('<select url="/gaia/species" class="flexable expand" />').attr('placeholder', lang.get('SPECIES').ucfirst());
         var common = $('<input type="text" class="flexable expand" />').attr('placeholder', lang.get('COMMON_NAME'));
         if (common_name !== undefined && common_name !== '') {
@@ -76,7 +78,7 @@ var gaia = {
         var nextheight = where.height();
         where.css({height: height});
         where.animate({height: nextheight}, 400, function () {
-            where.css({height: ''});
+            where.css({height: ''}).prepend(h3).pulse();
         });
         submit.on('click', function () {
             $('.error_input').removeClass('error_input');
