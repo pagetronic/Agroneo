@@ -1,10 +1,10 @@
 var gaia = {
-    form: function (where, species_id, common_name) {
+    form: function (where, species_id, common_name, specimen) {
         where.find('input').one('focus', function () {
-            gaia.makeform(where, species_id, common_name);
+            gaia.makeform(where, species_id, common_name, specimen);
         });
     },
-    makeform: function (where, species_id, common_name) {
+    makeform: function (where, species_id, common_name, specimen) {
         var height = 29;
         where.css({height: height, maxHeight: 'initial'});
         var title = where.find('input').attr('placeholder', lang.get('TITLE')).focus();
@@ -23,7 +23,6 @@ var gaia = {
             species.trigger('search', species_id);
         }
 
-
         var text = $('<textarea rows="4" />').attr('placeholder', lang.get('TEXT'));
         where.append($('<div class="flexible" />').append(text.autosize()));
 
@@ -36,13 +35,13 @@ var gaia = {
             });
         });
 
-        var images = $('<button class="flexable"  />').html('$svg.fa_icon_image ' + lang.get('UPLOAD_IMAGE')).addClass('flexable');
+        var blobs = $('<button class="flexable"  />').html('$svg.fa_icon_image ' + lang.get('UPLOAD_IMAGE')).addClass('flexable');
 
-        where.append($('<div class="flexo" />').append(location).append(images));
+        where.append($('<div class="flexo" />').append(location).append(blobs));
 
         var imgs = $('<div class="imgs" />');
         where.append(imgs);
-        blobstore.button(imgs, images, imgs, 224, 126);
+        blobstore.button(imgs, blobs, imgs, 224, 126);
 
         var submit = $('<button />').html('$svg.mi_save').append(lang.get('SAVE'));
         where.append(submit);
@@ -52,6 +51,52 @@ var gaia = {
         where.css({height: height});
         where.animate({height: nextheight}, 400, function () {
             where.css({height: ''});
+        });
+        submit.on('click', function () {
+            $('.error_input').removeClass('error_input');
+            var loading = $('<div/>')
+                .css({position: 'absolute', background: '#FFF', top: 0, bottom: 0, right: 0, left: 0})
+                .html(sys.loading(70, 'div'));
+            where.append(loading);
+            var images = [];
+            imgs.find('input[name=' + $.escapeSelector('docs[]') + ']').each(function () {
+                images.push(this.value);
+            });
+            api.post('/gaia', {
+                action: 'create',
+                title: title.val(),
+                species: species.val(),
+                common: common.val(),
+                text: text.val(),
+                location: coordinates,
+                images: images
+
+            }, function (rez) {
+                if (rez.error !== undefined) {
+                    sys.alert(rez.error);
+                } else if (rez.errors !== undefined) {
+                    $.each(rez.errors, function (key, value) {
+                        switch (key) {
+                            case 'location':
+                                location.addClass('error_input');
+                                break;
+                            case 'species':
+                                species.prev().addClass('error_input');
+                                break;
+                            case 'images':
+                                blobs.addClass('error_input');
+                                break;
+                        }
+                    });
+                } else if (rez.ok) {
+                    ajax.reload(false);
+                }
+
+                loading.remove();
+
+            }, function () {
+                loading.remove();
+            });
         });
     }
 };

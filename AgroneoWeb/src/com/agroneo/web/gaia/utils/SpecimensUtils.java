@@ -24,34 +24,16 @@ public class SpecimensUtils {
 	public static Json create(Json data, Users user) {
 		Date date = new Date();
 
-		Json specimen = new Json("user", user.getId()).put("date", date).put("update", date);
-
-		List<Json> errors = new ArrayList<>();
+		Json errors = new Json();
 
 		Json species = Db.findById("Species", data.getString("species"));
 		if (species == null) {
-			errors.add(new Json("species", data.getString("species") == null ? "EMPTY" : "UNKNOWN"));
-		} else {
-			specimen.put("species", species.getId());
-			specimen.put("family", species.getString("family"));
+			errors.put("species", data.getString("species") == null ? "EMPTY" : "UNKNOWN");
 		}
-
-		specimen.put("title",
-				data.getString("title", "").equals("") ?
-						species.getString("name") :
-						Fx.normalize(data.getString("title", ""))
-		);
-
-		specimen.put("text", Fx.normalize(data.getText("text")));
-
-		if (data.containsKey("commons")) {
-			specimen.put("commons", Fx.cleanURL(species.getString("commons")));
-		}
-
 
 		List<String> images = data.getList("images");
 		if (images == null || images.size() == 0) {
-			errors.add(new Json("images", "EMPTY"));
+			errors.put("images", "EMPTY");
 		} else {
 			List<String> errors_images = new ArrayList<>();
 			for (String image : images) {
@@ -60,27 +42,41 @@ public class SpecimensUtils {
 				}
 			}
 			if (errors_images.size() > 0) {
-				errors.add(new Json("images", errors_images));
-			} else {
-				specimen.put("images", images);
+				errors.put("images", errors_images);
 			}
 		}
 
 		if (!data.containsKey("location")) {
-			errors.add(new Json("location", "EMPTY"));
+			errors.put("location", "EMPTY");
 		} else {
-			Json location = data.getJson("location");
-			if (!testLocation(location)) {
-				errors.add(new Json("location", "INVALID"));
-			} else {
-				specimen.put("location", location);
+			if (!testLocation(data.getJson("location"))) {
+				errors.put("location", "INVALID");
 			}
 		}
 
 
-		if (errors.size() > 0) {
+		if (!errors.isEmpty()) {
 			return new Json("errors", errors);
 		}
+
+		Json specimen = new Json("user", user.getId()).put("date", date).put("update", date);
+
+		specimen.put("text", Fx.normalize(data.getText("text")));
+
+		if (data.containsKey("commons")) {
+			specimen.put("commons", Fx.cleanURL(species.getString("commons")));
+		}
+
+		specimen.put("species", species.getId());
+		specimen.put("family", species.getString("family"));
+
+		specimen.put("title",
+				data.getString("title", "").equals("") ?
+						species.getString("name") :
+						Fx.normalize(data.getString("title", ""))
+		);
+		specimen.put("images", images);
+		specimen.put("location", data.getJson("location"));
 
 		Db.save("Specimens", specimen);
 		Db.updateOne("Species", Filters.eq("_id", species.getId()), new Json("$inc", new Json("specimens", 1)));
@@ -114,11 +110,11 @@ public class SpecimensUtils {
 
 		Json set = new Json("update", date);
 
-		List<Json> errors = new ArrayList<>();
+		Json errors = new Json();
 
 		Json species = Db.findById("Species", data.getString("species"));
 		if (species == null) {
-			errors.add(new Json("species", data.getString("species") == null ? "EMPTY" : "UNKNOWN"));
+			errors.put("species", data.getString("species") == null ? "EMPTY" : "UNKNOWN");
 		} else {
 			set.put("species", species.getId());
 			set.put("family", species.getString("family"));
@@ -144,7 +140,7 @@ public class SpecimensUtils {
 		if (data.containsKey("images")) {
 			List<String> images = data.getList("images");
 			if (images == null || images.size() == 0) {
-				errors.add(new Json("images", "EMPTY"));
+				errors.put("images", "EMPTY");
 			} else {
 				List<String> errors_images = new ArrayList<>();
 				for (String image : images) {
@@ -153,7 +149,7 @@ public class SpecimensUtils {
 					}
 				}
 				if (errors_images.size() > 0) {
-					errors.add(new Json("images", errors_images));
+					errors.put("images", errors_images);
 				} else {
 					set.put("images", images);
 				}
@@ -163,16 +159,16 @@ public class SpecimensUtils {
 		if (data.containsKey("location")) {
 			Json location = data.getJson("location");
 			if (!testLocation(location)) {
-				errors.add(new Json("location", "INVALID"));
+				errors.put("location", "INVALID");
 			} else {
 				set.put("location", location);
 			}
 		}
 		if (!Db.exists("Specimens", Filters.eq("_id", data.getId()))) {
-			errors.add(new Json("id", "UNKNOWN"));
+			errors.put("id", "UNKNOWN");
 		}
 
-		if (errors.size() > 0) {
+		if (!errors.isEmpty()) {
 			return new Json("errors", errors);
 		}
 
@@ -209,6 +205,9 @@ public class SpecimensUtils {
 	}
 
 	private static boolean testLocation(Json location) {
+		if (location == null) {
+			return false;
+		}
 		if (location.getDouble("lat", Double.MAX_VALUE) > 90 && location.getDouble("lat", Double.MIN_VALUE) < -90) {
 			return false;
 		}

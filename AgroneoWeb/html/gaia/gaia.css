@@ -352,11 +352,11 @@ p.src a {
 }
 
 .creation_form {
+    position: relative;
     padding: 10px 7px 10px 7px;
     margin: 5px 0px 13px 0px;
     border-radius: 10px;
     border: 1px solid #CCC;
-    position: relative;
     box-shadow: 1px 1px 4px rgba(51, 51, 51, 0.25);
     background-color: #FFF;
     clear: both;
