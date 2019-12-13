@@ -29,20 +29,28 @@ var gaia = {
 
         var coordinates = null;
         var location = $('<button class="flexable gaiabtn" />').text(lang.get('LOCATION'));
-        var lat = $('<input type="number" class="flexable" size="5" />').attr('placeholder', lang.get('LATITUDE'));
-        var lon = $('<input type="number" class="flexable" size="5" />').attr('placeholder', lang.get('LONGITUDE'));
+        var lat = $('<input type="number" class="flexable" size="5" />')
+            .attr('placeholder', lang.get('LATITUDE')).attr('title', lang.get('LATITUDE'));
+        var lon = $('<input type="number" class="flexable" size="5" />')
+            .attr('placeholder', lang.get('LONGITUDE')).attr('title', lang.get('LONGITUDE'));
         var picker = $('<div class="picker" />').hide();
         location.one('click', function () {
             location.remove();
             picker.css({height: 300, width: '100%'});
-            map.getLocation(picker.show(), function (geoJson) {
-                coordinates = geoJson;
-                lat.val(geoJson.coordinates[1]);
-                lon.val(geoJson.coordinates[0]);
-            }, lat.val(), lon.val());
+            map.getLocation(picker.show(), function (latitude, longitude) {
+                coordinates = {type: 'Point', coordinates: [longitude, latitude]};
+                lat.val(latitude);
+                lon.val(longitude);
+            }, parseFloat(lat.val()), parseFloat(lon.val()));
 
             lat.add(lon).on('change', function () {
-                picker.locationpicker('location', {latitude: lat.val(), longitude: lon.val()});
+
+                var latitude = parseFloat(lat.val());
+                var longitude = parseFloat(lon.val());
+                if (!isNaN(latitude) && !isNaN(longitude)) {
+                    coordinates = {type: 'Point', coordinates: [longitude, latitude]};
+                    picker.locationpicker('location', {latitude: latitude, longitude: longitude});
+                }
             });
         });
 

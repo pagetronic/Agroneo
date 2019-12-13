@@ -606,7 +606,7 @@ var map = {
             var load = function (lat, lon) {
                 var options = {
                     onchanged: function (currentLocation, radius, isMarkerDropped) {
-                        onResult({type: 'Point', coordinates: [currentLocation.longitude, currentLocation.latitude]});
+                        onResult(currentLocation.longitude, currentLocation.latitude);
                     },
                     markerIcon: constants.cdnurl + '/css/map/marker.png'
                 };
@@ -620,7 +620,7 @@ var map = {
                 sys.locationpicker(where, options);
             };
 
-            if (lat !== '' && lon !== '' && lat !== null && lon !== null && lat !== undefined && lon !== undefined) {
+            if (lat !== undefined && lon !== undefined && !isNaN(lat) && !isNaN(lon)) {
                 load(lat, lon);
             } else if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
