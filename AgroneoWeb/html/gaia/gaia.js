@@ -90,6 +90,11 @@ var gaia = {
                 images: images
 
             }, function (rez) {
+                if (rez.ok) {
+                    ajax.load('/gaia/specimens?sort=-update');
+                    return;
+                }
+
                 if (rez.error !== undefined) {
                     sys.alert(rez.error);
                 } else if (rez.errors !== undefined) {
@@ -108,8 +113,6 @@ var gaia = {
                                 break;
                         }
                     });
-                } else if (rez.ok) {
-                    ajax.reload(false);
                 }
 
                 loading.remove();

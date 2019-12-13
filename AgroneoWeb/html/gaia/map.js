@@ -19,7 +19,7 @@ var map = {
             'Qg_HvHrF7' +
             'tHK' +
             'vEfeCPuFNR' +
-            'RsP8&sensor=true', after);
+            'RsP8', after);
     },
     init: function () {
 
