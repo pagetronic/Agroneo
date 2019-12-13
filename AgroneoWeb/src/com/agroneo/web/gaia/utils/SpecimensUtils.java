@@ -59,7 +59,7 @@ public class SpecimensUtils {
 			return new Json("errors", errors);
 		}
 
-		Json specimen = new Json("user", user.getId()).put("date", date).put("update", date);
+		Json specimen = new Json().add("users", user.getId()).put("date", date).put("update", date);
 
 		specimen.put("text", Fx.normalize(data.getText("text")));
 
