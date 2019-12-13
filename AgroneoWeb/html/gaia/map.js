@@ -1,4 +1,26 @@
 var map = {
+    lib: function (after) {
+        if (map.ggLoaded) {
+            after();
+            return;
+        }
+        map.ggLoaded = true;
+        //hide for Google alert
+        $.getScript('https://' +
+            'maps.' +
+            'goog' +
+            'le' +
+            'apis.com/m' +
+            'aps/ap' +
+            'i/js?' +
+            'key=' +
+            'AIzaSy' +
+            'BI3aiKN' +
+            'Qg_HvHrF7' +
+            'tHK' +
+            'vEfeCPuFNR' +
+            'RsP8&sensor=true', after);
+    },
     init: function () {
 
         var gaiamap = $('<div id="gaia"/>');
@@ -11,33 +33,13 @@ var map = {
         var loading = sys.loading(40);
         inmap.html(loading);
         sys.comodo.hide();
-        var loadmap = function () {
-            map.ggLoaded = true;
+
+        map.lib(function () {
             loading.remove();
             $('#middle').scrollTo(0);
             map.load(inmap);
             sys.comodo.hide();
-        };
-        if (map.ggLoaded) {
-            loadmap();
-        } else {
-            //hide for Google alert
-            $.getScript('https://' +
-                'maps.' +
-                'goog' +
-                'le' +
-                'apis.com/m' +
-                'aps/ap' +
-                'i/js?' +
-                'key=' +
-                'AIzaSy' +
-                'BI3aiKN' +
-                'Qg_HvHrF7' +
-                'tHK' +
-                'vEfeCPuFNR' +
-                'RsP8', loadmap);
-        }
-
+        });
     },
     load: function (dest) {
 
@@ -599,8 +601,33 @@ var map = {
 
         return latitude + latitudeCardinal + ' ' + longitude + longitudeCardinal;
     },
-    getLocation(coordinates, result) {
-        //todo load map
+    getLocation(where, onResult) {
+        map.lib(function () {
+            var load = function (lat, lon) {
+                var options = {
+                    onchanged: function (currentLocation, radius, isMarkerDropped) {
+                        onResult({type: 'Point', coordinates: [currentLocation.longitude, currentLocation.latitude]});
+                    }
+                };
+                if (lat !== undefined && lon !== undefined) {
+                    options.location = {latitude: lat, longitude: lon};
+                    options.mapOptions = {
+                        zoom: 10,
+                        center: {lat: lat, lng: lon}
+                    };
+                }
+                sys.locationpicker(where, options);
+            };
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    load(position.coords.latitude, position.coords.longitude);
+                });
+            } else {
+                load();
+            }
+
+        });
     }
 };
 

@@ -29,15 +29,18 @@ var gaia = {
 
         var coordinates = null;
         var location = $('<button class="flexable gaiabtn" />').text(lang.get('LOCATION'));
+        var picker = $('<div class="picker" />').hide();
         location.on('click', function () {
-            map.getLocation(coordinates, function (location) {
-                coordinates = location;
+            picker.css({height: 300, width: '100%'});
+            map.getLocation(picker.show(), function (geoJson) {
+                coordinates = geoJson;
             });
         });
 
         var blobs = $('<button class="flexable"  />').html('$svg.fa_icon_image ' + lang.get('UPLOAD_IMAGE')).addClass('flexable');
 
         where.append($('<div class="flexo" />').append(location).append(blobs));
+        where.append(picker);
 
         var imgs = $('<div class="imgs" />');
         where.append(imgs);
