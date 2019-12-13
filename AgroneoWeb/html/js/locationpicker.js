@@ -114,11 +114,6 @@ sys = $.extend({}, sys, {
                         gmapContext.autocomplete = new google.maps.places.Autocomplete(inputBinding.locationNameInput.get(0), gmapContext.settings.autocompleteOptions);
                         google.maps.event.addListener(gmapContext.autocomplete, 'place_changed', function () {
                             blur = false;
-                            var place = gmapContext.autocomplete.getPlace();
-                            if (!place.geometry) {
-                                gmapContext.settings.onlocationnotfound(place.name);
-                                return;
-                            }
                             GmUtility.setPosition(gmapContext, place.geometry.location, function (context) {
                                 updateInputValues(inputBinding, context);
                                 context.settings.onchanged.apply(gmapContext.domContainer,
@@ -227,19 +222,9 @@ sys = $.extend({}, sys, {
                     var gmapContext = getContextForElement(_targetDomElement);
                     switch (options) {
                         case "location":
-                            if (params === undefined) { // Getter
-                                var location = GmUtility.locationFromLatLng(gmapContext.location);
-                                location.radius = gmapContext.radius;
-                                location.name = gmapContext.locationName;
-                                return location;
-                            } else { // Setter
-                                if (params.radius) {
-                                    gmapContext.radius = params.radius;
-                                }
                                 GmUtility.setPosition(gmapContext, new google.maps.LatLng(params.latitude, params.longitude), function (gmapContext) {
                                     updateInputValues(gmapContext.settings.inputBinding, gmapContext);
                                 });
-                            }
                             break;
                         case "map":
                             /**
@@ -292,7 +277,6 @@ sys = $.extend({}, sys, {
                         locationName: settings.locationName,
                         settings: settings,
                         autocompleteOptions: settings.autocompleteOptions,
-                        addressFormat: settings.addressFormat,
                         draggable: settings.draggable,
                         markerIcon: settings.markerIcon,
                         markerDraggable: settings.markerDraggable,
@@ -357,12 +341,8 @@ sys = $.extend({}, sys, {
                 enableAutocomplete: false,
                 enableAutocompleteBlur: false,
                 autocompleteOptions: null,
-                addressFormat: 'postal_code',
-                enableReverseGeocode: true,
                 draggable: true,
                 onchanged: function (currentLocation, radius, isMarkerDropped) {
-                },
-                onlocationnotfound: function (locationName) {
                 },
                 oninitialized: function (component) {
                 },

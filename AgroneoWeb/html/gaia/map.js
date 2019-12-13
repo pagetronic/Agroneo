@@ -601,13 +601,14 @@ var map = {
 
         return latitude + latitudeCardinal + ' ' + longitude + longitudeCardinal;
     },
-    getLocation(where, onResult) {
+    getLocation(where, onResult, lat, lon) {
         map.lib(function () {
             var load = function (lat, lon) {
                 var options = {
                     onchanged: function (currentLocation, radius, isMarkerDropped) {
                         onResult({type: 'Point', coordinates: [currentLocation.longitude, currentLocation.latitude]});
-                    }
+                    },
+                    markerIcon: constants.cdnurl + '/css/map/marker.png'
                 };
                 if (lat !== undefined && lon !== undefined) {
                     options.location = {latitude: lat, longitude: lon};
@@ -619,7 +620,9 @@ var map = {
                 sys.locationpicker(where, options);
             };
 
-            if (navigator.geolocation) {
+            if (lat !== '' && lon !== '' && lat !== null && lon !== null && lat !== undefined && lon !== undefined) {
+                load(lat, lon);
+            } else if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     load(position.coords.latitude, position.coords.longitude);
                 });

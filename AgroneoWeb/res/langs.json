@@ -281,6 +281,15 @@
     "pt": "último quarto da lua",
     "de": "letztes Viertel Mond"
   },
+  "LATITUDE": {
+    "js": true,
+    "fr": "latitude",
+    "en": "latitude",
+    "it": "latitudine",
+    "es": "latitud",
+    "pt": "latitude",
+    "de": "Breite"
+  },
   "LEO": {
     "fr": "Lion ♌",
     "en": "Leo ♌",
@@ -314,6 +323,15 @@
     "es": "ubicación",
     "pt": "localização",
     "de": "Standort"
+  },
+  "LONGITUDE": {
+    "js": true,
+    "fr": "longitude",
+    "en": "longitude",
+    "it": "longitudine",
+    "es": "longitud",
+    "pt": "longitude",
+    "de": "Längengrad"
   },
   "MOON": {
     "fr": "Lune",

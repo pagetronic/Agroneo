@@ -32,12 +32,17 @@ var gaia = {
         var lat = $('<input type="number" class="flexable" size="5" />').attr('placeholder', lang.get('LATITUDE'));
         var lon = $('<input type="number" class="flexable" size="5" />').attr('placeholder', lang.get('LONGITUDE'));
         var picker = $('<div class="picker" />').hide();
-        location.on('click', function () {
+        location.one('click', function () {
+            location.remove();
             picker.css({height: 300, width: '100%'});
             map.getLocation(picker.show(), function (geoJson) {
                 coordinates = geoJson;
                 lat.val(geoJson.coordinates[1]);
                 lon.val(geoJson.coordinates[0]);
+            }, lat.val(), lon.val());
+
+            lat.add(lon).on('change', function () {
+                picker.locationpicker('location', {latitude: lat.val(), longitude: lon.val()});
             });
         });
 
@@ -92,6 +97,8 @@ var gaia = {
                         switch (key) {
                             case 'location':
                                 location.addClass('error_input');
+                                lat.addClass('error_input');
+                                lon.addClass('error_input');
                                 break;
                             case 'species':
                                 species.prev().addClass('error_input');
