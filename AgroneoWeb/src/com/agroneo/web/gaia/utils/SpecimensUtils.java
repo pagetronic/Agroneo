@@ -53,6 +53,13 @@ public class SpecimensUtils {
 				errors.put("location", "INVALID");
 			}
 		}
+		if (!data.containsKey("authors")) {
+			for (String author : data.getList("authors")) {
+				if (!Db.exists("Users", Filters.eq("_id", author))) {
+					errors.put("authors", "INVALID");
+				}
+			}
+		}
 
 
 		if (!errors.isEmpty()) {

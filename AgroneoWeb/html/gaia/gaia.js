@@ -10,6 +10,19 @@ var gaia = {
         var title = where.find('input');
         var h3 = $('<h3 />').text(title.attr('placeholder'));
         title.attr('placeholder', lang.get('TITLE')).focus();
+
+        var authors = $('<select url="/users" class="flexable expand" multiple="true" />').attr('placeholder', lang.get('AUTHORS').ucfirst());
+
+        where.append($('<div/>').append(authors));
+        authors.selectable({
+            add: function () {
+                login.add(function (id) {
+                    authors.trigger('search', id);
+                });
+            }
+        });
+        authors.trigger('search', sys.user.id);
+
         var species = $('<select url="/gaia/species" class="flexable expand" />').attr('placeholder', lang.get('SPECIES').ucfirst());
         var common = $('<input type="text" class="flexable expand" />').attr('placeholder', lang.get('COMMON_NAME'));
         if (common_name !== undefined && common_name !== '') {
@@ -97,7 +110,8 @@ var gaia = {
                 common: common.val(),
                 text: text.val(),
                 location: coordinates,
-                images: images
+                images: images,
+                authors: authors.val()
 
             }, function (rez) {
                 if (rez.ok) {
@@ -121,6 +135,11 @@ var gaia = {
                             case 'images':
                                 blobs.addClass('error_input');
                                 break;
+                            case 'authors':
+                                authors.addClass('error_input');
+                                break;
+
+
                         }
                     });
                 }
