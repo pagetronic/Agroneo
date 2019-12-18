@@ -6,7 +6,6 @@ package com.agroneo.web.gaia;
 import com.agroneo.web.gaia.utils.GaiaGeoUtils;
 import com.agroneo.web.gaia.utils.SpecimensAggregator;
 import com.agroneo.web.gaia.utils.SpecimensUtils;
-import com.mongodb.client.model.Filters;
 import live.page.web.system.Settings;
 import live.page.web.system.json.Json;
 import live.page.web.system.servlet.HttpServlet;
@@ -77,12 +76,24 @@ public class GaiaServlet extends HttpServlet {
 
 	@Override
 	public void doGetApiAuth(ApiServletRequest req, ApiServletResponse resp, Users user) throws IOException, ServletException {
-		resp.sendResponse(SpecimensAggregator.getSpecimens(
-				Filters.eq("user", user.getId()),
-				req.getString("sort", null),
-				req.getString("paging", null))
-		);
+		doGetApiPublic(req, resp);
 	}
+	@Override
+	public void doGetApiPublic(ApiServletRequest req, ApiServletResponse resp) throws IOException, ServletException {
+		if (req.getRequestURI().equals("/gaia/specimens")) {
+			resp.sendResponse(SpecimensAggregator.getSpecimens(
+					null,
+					req.getString("sort", "-date"),
+					req.getString("paging", null))
+			);
+			return;
+		}
+
+		resp.sendResponse(new Json("error", "INVALID"));
+
+	}
+
+
 
 	@Override
 	public void doPostApiPublic(ApiServletRequest req, ApiServletResponse resp, Json data) throws IOException {
