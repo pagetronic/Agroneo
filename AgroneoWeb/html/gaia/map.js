@@ -601,7 +601,7 @@ var map = {
 
         return latitude + latitudeCardinal + ' ' + longitude + longitudeCardinal;
     },
-    getLocation(where, onResult, lat, lon) {
+    getLocation: function (where, onResult, lat, lon) {
         map.lib(function () {
             var load = function (lat, lon) {
                 var options = {
