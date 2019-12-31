@@ -16,6 +16,7 @@ public class Scopes implements ServletContextListener {
 				"email",
 				"pm",
 				"threads",
+				"forums",
 				"accounts"
 		));
 	}
