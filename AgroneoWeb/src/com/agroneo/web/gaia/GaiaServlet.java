@@ -78,6 +78,7 @@ public class GaiaServlet extends HttpServlet {
 	public void doGetApiAuth(ApiServletRequest req, ApiServletResponse resp, Users user) throws IOException, ServletException {
 		doGetApiPublic(req, resp);
 	}
+
 	@Override
 	public void doGetApiPublic(ApiServletRequest req, ApiServletResponse resp) throws IOException, ServletException {
 		if (req.getRequestURI().equals("/gaia/specimens")) {
@@ -86,13 +87,14 @@ public class GaiaServlet extends HttpServlet {
 					req.getString("sort", "-date"),
 					req.getString("paging", null))
 			);
-			return;
+		} else if (req.getId() != null) {
+			resp.sendResponse(SpecimensAggregator.getSpecimen(
+					req.getId())
+			);
+		} else {
+			resp.sendResponse(new Json("error", "INVALID"));
 		}
-
-		resp.sendResponse(new Json("error", "INVALID"));
-
 	}
-
 
 
 	@Override
