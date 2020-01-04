@@ -12,6 +12,7 @@ import live.page.web.system.db.Db;
 import live.page.web.system.db.paginer.Paginer;
 import live.page.web.system.json.Json;
 import live.page.web.utils.Fx;
+import org.bson.BsonUndefined;
 import org.bson.conversions.Bson;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -77,7 +78,7 @@ public class GaiaGeoUtils implements ServletContextListener {
 			return global;
 		}
 		Aggregator grouper = new Aggregator(
-				"id", "date", "species", "location", "distance", "text", "images", "sames", "author", "tropicos", "tId"
+				"id", "title", "text", "images", "date", "species", "location", "distance", "sames", "author", "tropicos", "tId"
 		);
 
 		List<Json> zones = (zoom > 5) ? getZones(bounds) : getZones();
@@ -121,9 +122,14 @@ public class GaiaGeoUtils implements ServletContextListener {
 											Accumulators.push("images", "$images")
 									)),
 									Aggregates.project(grouper.getProjection()
+											.put("title", new Json("$cond", Arrays.asList(
+													new Json("$or", Arrays.asList(new Json("$eq", Arrays.asList("$title", new BsonUndefined())), new Json("$eq", Arrays.asList("$title", null)))),
+													"$species.name", "$title"
+											)))
 											.put("species", new Json("_id", true).put("name", true).put("family", true))
 											.put("tropicos", new Json("$concat", Arrays.asList("http://www.tropicos.org/Specimen/", new Json("$substr", Arrays.asList("$tId", 0, -1)))))
 											.remove("tId")
+
 									),
 									Aggregates.project(grouper.getProjectionOrder())
 
