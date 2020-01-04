@@ -241,10 +241,6 @@ public class GaiaGeoUtils implements ServletContextListener {
 
 		double tileWidth = (east - west) / width;
 
-		List<Bson> pipeline = new ArrayList<>();
-		pipeline.add(Aggregates.limit(1));
-
-		pipeline.add(Aggregates.project(new Json("_id", false).put("result", new ArrayList<>())));
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < width; y++) {
