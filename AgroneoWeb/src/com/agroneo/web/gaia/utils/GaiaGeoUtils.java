@@ -239,7 +239,10 @@ public class GaiaGeoUtils implements ServletContextListener {
 			east = bounds.getDouble("east");
 		}
 
-		double tileWidth = (east - west) / width;
+		double maxlong = (east - west);
+		double maxlat = (north - south);
+
+		double tileWidth = Math.max(maxlong, maxlat) / width;
 
 
 		for (int x = 0; x < width; x++) {
