@@ -3,6 +3,7 @@
  */
 package com.agroneo.web;
 
+import live.page.web.system.Settings;
 import live.page.web.system.db.Db;
 import live.page.web.system.servlet.BaseServlet;
 import live.page.web.system.servlet.wrapper.BaseServletRequest;
@@ -12,10 +13,15 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
-@WebServlet(name = "Catch All", urlPatterns = {"/"})
+@WebServlet(name = "Catch All", urlPatterns = {"/", "/*"})
 public class CatchAll extends BaseServlet {
 	@Override
 	public void doService(BaseServletRequest req, BaseServletResponse resp) throws IOException, ServletException {
+
+		if (req.getServerName().equals(Settings.HOST_CDN)) {
+			resp.sendError(404, "Not found");
+			return;
+		}
 
 		if (req.getRequestURI().startsWith("/especes") || req.getRequestURI().startsWith("/species") || req.getRequestURI().startsWith("/plantae")) {
 			req.getRequestDispatcher("/gaia").forward(req, resp);
