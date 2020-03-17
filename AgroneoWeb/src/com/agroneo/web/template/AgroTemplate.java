@@ -5,12 +5,13 @@ package com.agroneo.web.template;
 
 import live.page.web.system.cosmetic.tmpl.BaseTemplate;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
-public class AgroTemplate extends BaseTemplate implements ServletContextListener {
+public class AgroTemplate extends BaseTemplate {
+	public AgroTemplate() {
+		setTemplate(this);
+	}
 
 	@Override
 	public Class[] getUserDirective() {
@@ -22,13 +23,4 @@ public class AgroTemplate extends BaseTemplate implements ServletContextListener
 		return FxTemplate.class;
 	}
 
-	@Override
-	public void contextInitialized(ServletContextEvent sce) {
-		setTemplate(new AgroTemplate());
-	}
-
-	@Override
-	public void contextDestroyed(ServletContextEvent sce) {
-
-	}
 }
