@@ -55,7 +55,7 @@ public class SpecimensServlet {
 			return;
 		}
 
-		req.setRobotsIndex(specimen.get("tropicos") == null, true);
+		req.setRobotsIndex(true);
 
 
 		req.setTitle(GaiaTitle.convert(specimen.getString("title"), req.getLng()));
