@@ -6,6 +6,7 @@ package com.agroneo.web.gaia;
 import com.agroneo.web.gaia.utils.GaiaGeoUtils;
 import com.agroneo.web.gaia.utils.SpecimensAggregator;
 import com.agroneo.web.gaia.utils.SpecimensUtils;
+import live.page.web.system.Language;
 import live.page.web.system.Settings;
 import live.page.web.system.json.Json;
 import live.page.web.system.servlet.HttpServlet;
@@ -26,14 +27,13 @@ import java.util.regex.Pattern;
 @WebServlet(name = "Gaia Servlet", urlPatterns = {"/gaia", "/gaia/*"})
 public class GaiaServlet extends HttpServlet {
 
-
 	@Override
-	public void doGetAuth(WebServletRequest req, WebServletResponse resp, Users user) throws IOException, ServletException {
-		doGetPublic(req, resp);
+	public void doGetPublic(WebServletRequest req, WebServletResponse resp) throws IOException {
+		resp.sendError(401, Language.get("PLEASE_LOGIN", req.getLng()));
 	}
 
 	@Override
-	public void doGetPublic(WebServletRequest req, WebServletResponse resp) throws IOException {
+	public void doGetAuth(WebServletRequest req, WebServletResponse resp, Users user) throws IOException, ServletException {
 
 		req.setAttribute("active", "gaia");
 		req.setImageOg(Settings.getCDNHttp() + "/css/map/map.png");
@@ -74,13 +74,9 @@ public class GaiaServlet extends HttpServlet {
 		PlantaeServlet.doGetHome(req, resp);
 	}
 
-	@Override
-	public void doGetApiAuth(ApiServletRequest req, ApiServletResponse resp, Users user) throws IOException, ServletException {
-		doGetApiPublic(req, resp);
-	}
 
 	@Override
-	public void doGetApiPublic(ApiServletRequest req, ApiServletResponse resp) throws IOException, ServletException {
+	public void doGetApiAuth(ApiServletRequest req, ApiServletResponse resp, Users user) throws IOException, ServletException {
 		if (req.getRequestURI().equals("/gaia/specimens")) {
 			resp.sendResponse(SpecimensAggregator.getSpecimens(
 					null,
@@ -98,7 +94,7 @@ public class GaiaServlet extends HttpServlet {
 
 
 	@Override
-	public void doPostApiPublic(ApiServletRequest req, ApiServletResponse resp, Json data) throws IOException {
+	public void doPostApiAuth(ApiServletRequest req, ApiServletResponse resp, Json data, Users user) throws IOException, ServletException {
 
 		Json rez = new Json("error", "NOT_FOUND");
 		switch (data.getString("action")) {
@@ -117,15 +113,7 @@ public class GaiaServlet extends HttpServlet {
 				);
 
 				break;
-		}
 
-		resp.sendResponse(rez);
-	}
-
-	@Override
-	public void doPostApiAuth(ApiServletRequest req, ApiServletResponse resp, Json data, Users user) throws IOException, ServletException {
-		Json rez = new Json();
-		switch (data.getString("action")) {
 			case "create":
 				rez = SpecimensUtils.create(data, user);
 				break;
@@ -133,12 +121,7 @@ public class GaiaServlet extends HttpServlet {
 				rez = SpecimensUtils.edit(data, user);
 				break;
 		}
-		if (!rez.isEmpty()) {
-			resp.sendResponse(rez);
-			return;
-		}
-
-		doPostApiPublic(req, resp, data);
+		resp.sendResponse(rez);
 	}
 
 }
