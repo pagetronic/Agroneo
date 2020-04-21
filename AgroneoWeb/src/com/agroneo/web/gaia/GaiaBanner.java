@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 @WebListener
 public class GaiaBanner implements ServletContextListener {
 
-	public static final int MAX = 2; // times
-	public static final int DELAY = 5; //per seconds
+	public static final int MAX = 3; // times
+	public static final int DELAY = 3; //per seconds
 	private static final Map<String, Integer> banned = new HashMap<>();
 	private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
