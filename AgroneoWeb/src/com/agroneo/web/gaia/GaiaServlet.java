@@ -23,6 +23,10 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/*
+	TODO: need to control scraping with big fingers for public exposure
+ */
 @Api(scope = "gaia")
 @WebServlet(name = "Gaia Servlet", urlPatterns = {"/gaia", "/gaia/*"})
 public class GaiaServlet extends HttpServlet {
