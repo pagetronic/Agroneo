@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /gaia
 Disallow: /oauth
 Disallow: /*?*tz=
 Disallow: /*noreply*
