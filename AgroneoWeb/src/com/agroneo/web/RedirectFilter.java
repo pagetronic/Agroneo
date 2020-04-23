@@ -33,14 +33,8 @@ public class RedirectFilter implements Filter {
 			return;
 		}
 
-		if (requestURI.contains("/phytotherapie")) {
-			ServletUtils.redirect301("https://renseigner.com/sante" + requestURI, resp);
-			return;
-
-		}
-
-		if (requestURI.startsWith("/plantes/plantes-medicinales")) {
-			ServletUtils.redirect301("https://renseigner.com/sante" + requestURI.replace("/plantes/plantes-medicinales", "/sante/phytotherapie"), resp);
+		if (requestURI.startsWith("/plantes/plantes-medicinales") || requestURI.contains("/phytotherapie")) {
+			ServletUtils.redirect301("https://renseigner.com/sante" + requestURI.replace("/plantes/plantes-medicinales", "/phytotherapie"), resp);
 			return;
 
 		}
