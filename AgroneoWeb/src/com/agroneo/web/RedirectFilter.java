@@ -24,6 +24,15 @@ public class RedirectFilter implements Filter {
 		}
 
 
+
+		if (host.equals("agroneo.com") && !requestURI.equals("/robots.txt") && !requestURI.equals("/") && !requestURI.equals("/oauth")) {
+
+			String queryString = ((HttpServletRequest) req).getQueryString();
+
+			ServletUtils.redirect301("https://fr.agroneo.com" + requestURI + (queryString != null ? "?" + queryString : ""), resp);
+			return;
+		}
+
 		if (requestURI.contains("/phytotherapie")) {
 			ServletUtils.redirect301("https://renseigner.com/sante" + requestURI, resp);
 			return;
@@ -34,15 +43,6 @@ public class RedirectFilter implements Filter {
 			ServletUtils.redirect301("https://renseigner.com/sante" + requestURI.replace("/plantes/plantes-medicinales", "/sante/phytotherapie"), resp);
 			return;
 
-		}
-
-
-		if (host.equals("agroneo.com") && !requestURI.equals("/robots.txt") && !requestURI.equals("/") && !requestURI.equals("/oauth")) {
-
-			String queryString = ((HttpServletRequest) req).getQueryString();
-
-			ServletUtils.redirect301("https://fr.agroneo.com" + requestURI + (queryString != null ? "?" + queryString : ""), resp);
-			return;
 		}
 
 		chain.doFilter(req, resp);
