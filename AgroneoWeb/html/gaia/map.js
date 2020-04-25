@@ -394,12 +394,7 @@ var map = {
             popin.header(lang.get('SHARE'));
 
         })[0]);
-        ggmap.controls[google.maps.ControlPosition.RIGHT_TOP].push(
-            $('<div class="groupmap social"/>').append($('<a class="paypal"/>').attr('title', 'PayPal').html('$svg.fa_icon_paypal').on('click', function () {
-                window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8TULTLMAYUVL8', '_blank', 'left=' + ((screen.width - 600) / 2) + ',top=50,width=600,height=700,resizable=yes').focus();
-                return false;
-            }))[0]
-        );
+
         ggmap.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($('<div class="groupmap zoom"/>').append($('<a/>').html('$svg.fa_icon_plus').on('click', function () {
             ggmap.setZoom(ggmap.getZoom() + 1);
         })).append($('<a/>').html('$svg.fa_icon_minus').on('click', function () {
