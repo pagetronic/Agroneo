@@ -285,7 +285,7 @@ var map = {
                         });
 
                         var ind = 0.5 + (0.001 * zone.count);
-                        var size = parseInt(64 * ind);
+                        var size = Math.round(64 * ind);
 
 
                         var marker = new google.maps.Marker({
@@ -296,7 +296,7 @@ var map = {
                             icon: new google.maps.MarkerImage(constants.cdnurl + '/ui/map/cluster@' + size,
                                 new google.maps.Size(size, size),
                                 new google.maps.Point(0, 0),
-                                new google.maps.Point(parseInt(size / 2 * ind), parseInt(size / 2 * ind))
+                                new google.maps.Point(Math.round(size / 2 * ind), Math.round(size / 2 * ind))
                             ),
                             label: {
                                 text: '' + (zone.count >= rez.max ? '+' + rez.max : zone.count),
