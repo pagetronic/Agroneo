@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Scopes {
 	public Scopes() {
 		live.page.web.api.Scopes.scopes.addAll(Arrays.asList(
-				"gaia",
+			//	"gaia",
 				"email",
 				"pm",
 				"threads",
