@@ -18,10 +18,17 @@ public class Indexes {
 /*
 var chuncks = db.getCollection('BlobChunks');
 var files = db.getCollection('BlobFiles');
-files.find({mobot:{$ne:null}}).forEach(function(img) {
-    chuncks.deleteMany({f:img._id});
-    files.deleteOne({_id:img._id});
+
+do {
+var ids = [];
+    files.find({mobot:{$ne:null}}).limit(200).forEach(function(img) {
+        ids.push(img._id);
     });
+
+    chuncks.deleteMany({f:{$in:ids}});
+    files.deleteMany({_id:{$in:ids}});
+} while (ids.length>0);
+
 db.repairDatabase();
 
  */
