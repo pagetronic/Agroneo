@@ -15,3 +15,13 @@ public class Indexes {
 	}
 }
 
+/*
+var chuncks = db.getCollection('BlobChunks');
+var files = db.getCollection('BlobFiles');
+files.find({mobot:{$ne:null}}).forEach(function(img) {
+    chuncks.deleteMany({f:img._id});
+    files.deleteOne({_id:img._id});
+    });
+db.repairDatabase();
+
+ */
