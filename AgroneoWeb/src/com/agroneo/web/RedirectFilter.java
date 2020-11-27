@@ -24,7 +24,6 @@ public class RedirectFilter implements Filter {
 		}
 
 
-
 		if (host.equals("agroneo.com") && !requestURI.equals("/robots.txt") && !requestURI.equals("/") && !requestURI.equals("/oauth")) {
 
 			String queryString = ((HttpServletRequest) req).getQueryString();
@@ -35,6 +34,11 @@ public class RedirectFilter implements Filter {
 
 		if (requestURI.startsWith("/plantes/plantes-medicinales") || requestURI.contains("/phytotherapie")) {
 			ServletUtils.redirect301("https://renseigner.com/sante" + requestURI.replace("/plantes/plantes-medicinales", "/phytotherapie"), resp);
+			return;
+
+		}
+		if (requestURI.startsWith("/gaia")) {
+			ServletUtils.redirect301("/", resp);
 			return;
 
 		}
