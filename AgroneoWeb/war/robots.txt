@@ -5,6 +5,7 @@ Disallow: /*noreply*
 Disallow: /noads
 Disallow: /profile
 Disallow: *%24*
+Disallow: /gaia
 
 User-agent: Mediapartners-Google
 Allow: /

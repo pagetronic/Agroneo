@@ -15,7 +15,7 @@ public class AgroneoPipeliner implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		PipelinerStore.addPipeliner("specimens", SpecimensAggregator.SearchSpecimensPipeline.class);
+		//PipelinerStore.addPipeliner("specimens", SpecimensAggregator.SearchSpecimensPipeline.class);
 	}
 
 	@Override

@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Api(scope = "gaia")
-@WebServlet(name = "Gaia Servlet", urlPatterns = {"/gaia", "/gaia/*"})
+//@Api(scope = "gaia")
+//@WebServlet(name = "Gaia Servlet", urlPatterns = {"/gaia", "/gaia/*"})
 public class GaiaServlet extends HttpServlet {
 
 

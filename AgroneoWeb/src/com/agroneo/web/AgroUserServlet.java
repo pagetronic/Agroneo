@@ -16,7 +16,7 @@ import java.io.IOException;
 public class AgroUserServlet extends UserServlet {
 	@Override
 	public void extra(WebServletRequest req, WebServletResponse resp) throws IOException {
-		req.setAttribute("specimens", SpecimensAggregator.getSpecimens(Filters.eq("users", req.getId()), req.getString("sort", "-date"), req.getString("paging", null)));
+		//req.setAttribute("specimens", SpecimensAggregator.getSpecimens(Filters.eq("users", req.getId()), req.getString("sort", "-date"), req.getString("paging", null)));
 	}
 
 }

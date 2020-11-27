@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-@WebListener
+//@WebListener
 public class GaiaBanner implements ServletContextListener {
 
 	public static final int MAX = 3; // times

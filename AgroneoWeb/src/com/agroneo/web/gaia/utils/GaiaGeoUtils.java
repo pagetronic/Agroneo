@@ -29,7 +29,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-@WebListener
+//@WebListener
 public class GaiaGeoUtils implements ServletContextListener {
 
 	private static final int limit = 20;
