@@ -23,9 +23,7 @@ public class CatchAll extends BaseServlet {
 			return;
 		}
 
-		if (req.getRequestURI().startsWith("/especes") || req.getRequestURI().startsWith("/species") || req.getRequestURI().startsWith("/plantae")) {
-			req.getRequestDispatcher("/gaia").forward(req, resp);
-		} else if (req.getRequestURI().equals("/")) {
+		if (req.getRequestURI().equals("/")) {
 			req.getRequestDispatcher("/index").forward(req, resp);
 		} else if (req.getRequestURI().matches("/(questions|forum)/.*?([A-Z0-9]{" + Db.DB_KEY_LENGTH + "})$")) {
 			req.getRequestDispatcher("/threads").forward(req, resp);
